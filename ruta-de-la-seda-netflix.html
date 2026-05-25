@@ -1,0 +1,2115 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ruta de la Seda · Volate Adventures</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,600&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:        #060d12;
+  --bg2:       #0c1820;
+  --bg3:       #122030;
+  --bg4:       #182a3c;
+  --text:      #e8e0d0;
+  --text-dim:  #c8b89a;
+  --text-mute: #7a6e60;
+  --teal:      #2ec4d8;
+  --teal-mid:  #1a90a8;
+  --teal-deep: #0e5c6e;
+  --gold:      #d4a04a;
+  --gold-dim:  #a07830;
+  --terra:     #c4512d;
+  --terra-dim: #8a3318;
+  --line:      rgba(46,196,216,0.1);
+  --line2:     rgba(46,196,216,0.18);
+  --r:         10px;
+}
+
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{
+  background:var(--bg);color:var(--text);
+  font-family:'Outfit',sans-serif;
+  overflow-x:hidden;-webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+  text-rendering:optimizeLegibility;
+  font-size:16px;
+}
+
+/* GRAIN */
+body::after{
+  content:'';position:fixed;top:-50%;left:-50%;
+  width:200%;height:200%;
+  background-image:url("data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='rgba(46%2C196%2C216%2C0.07)' stroke-width='0.6'%3E%3Cpolygon points='40%2C4 50%2C22 70%2C22 56%2C36 62%2C56 40%2C44 18%2C56 24%2C36 10%2C22 30%2C22'/%3E%3Crect x='20' y='20' width='40' height='40' transform='rotate(45 40 40)'/%3E%3C/g%3E%3C/svg%3E");
+  opacity:0.3;pointer-events:none;z-index:9998;
+  animation:patternDrift 120s linear infinite;
+}
+@keyframes patternDrift{
+  0%{transform:translate(0,0) rotate(0deg);}
+  100%{transform:translate(40px,40px) rotate(0.5deg);}
+}
+
+/* NAV */
+.nav{
+  position:fixed;top:0;left:0;right:0;z-index:500;
+  padding:22px 52px;
+  display:flex;align-items:center;gap:28px;
+  background:linear-gradient(to bottom,rgba(5,10,13,0.95) 0%,transparent 100%);
+  transition:all 0.4s;
+}
+.nav.solid{
+  padding:13px 52px;
+  background:rgba(5,10,13,0.88);
+  backdrop-filter:blur(32px) saturate(200%);
+  -webkit-backdrop-filter:blur(32px) saturate(200%);
+  border-bottom:1px solid var(--line);
+}
+.nav-logo{
+  display:flex;align-items:center;gap:10px;
+}
+.nav-logo-mark{
+  width:28px;height:28px;
+  background:linear-gradient(135deg,var(--teal-deep),var(--teal-mid));
+  border-radius:4px;
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Cormorant Garamond',serif;
+  font-size:14px;font-weight:700;color:#fff;
+  letter-spacing:-0.5px;flex-shrink:0;
+}
+.nav-brand{
+  font-family:'Cormorant Garamond',serif;
+  font-size:18px;font-weight:600;
+  color:var(--text);letter-spacing:2.5px;text-transform:uppercase;
+}
+.nav-brand em{font-style:italic;color:var(--gold);}
+.nav-rule{width:1px;height:18px;background:var(--line2);flex-shrink:0;}
+.nav-links{display:flex;gap:2px;}
+.nav-links a{
+  font-size:11px;letter-spacing:2px;text-transform:uppercase;font-weight:500;
+  color:var(--text);text-decoration:none;cursor:pointer;
+  padding:7px 14px;border-radius:100px;
+  transition:color 0.2s,background 0.2s;
+  opacity:0.75;
+}
+.nav-links a:hover{color:var(--text);background:rgba(46,196,216,0.08);opacity:1;}
+
+/* HERO */
+.hero{
+  position:relative;min-height:95vh;
+  display:flex;align-items:flex-end;
+  padding:100px 52px 90px;overflow:hidden;
+}
+.hero-mesh{
+  position:absolute;inset:0;
+  background:
+    radial-gradient(ellipse 60% 70% at 5% 90%, rgba(14,92,110,0.7) 0%,transparent 55%),
+    radial-gradient(ellipse 40% 50% at 85% 8%, rgba(90,35,12,0.4) 0%,transparent 48%),
+    radial-gradient(ellipse 50% 40% at 88% 88%, rgba(10,25,35,0.5) 0%,transparent 45%),
+    radial-gradient(ellipse 55% 35% at 45% 45%, rgba(6,13,18,0.6) 0%,transparent 60%),
+    radial-gradient(ellipse 35% 55% at 60% 70%, rgba(46,196,216,0.06) 0%,transparent 50%),
+    var(--bg);
+}
+.hero-vignette{
+  position:absolute;inset:0;
+  background:linear-gradient(
+    to top,
+    rgba(5,10,13,1) 0%,
+    rgba(5,10,13,0.7) 30%,
+    rgba(5,10,13,0.15) 60%,
+    transparent 100%
+  );
+}
+.hero-wm{
+  position:absolute;right:-2%;bottom:-12%;
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(180px,24vw,380px);font-weight:700;
+  color:transparent;
+  -webkit-text-stroke:1px rgba(255,255,255,0.032);
+  line-height:1;user-select:none;pointer-events:none;z-index:1;
+  letter-spacing:-4px;
+}
+.hero-countries{
+  display:none;
+}
+.hero-country{
+  font-size:9px;letter-spacing:4px;text-transform:uppercase;
+  color:var(--text);writing-mode:vertical-rl;text-orientation:mixed;
+  transform:rotate(180deg);font-weight:500;
+}
+.hero-content{
+  position:relative;z-index:3;
+  display:grid;
+  grid-template-columns:1fr 260px;
+  gap:48px;
+  align-items:center;
+  padding-bottom:90px;
+  max-width:920px;
+  width:100%;
+  margin:0 auto;
+}
+.hero-left{min-width:0;}
+.hero-right{
+  width:100%;
+}
+
+/* PAÍSES + TEMPERATURA */
+.hcp-eyebrow{
+  font-size:9px;letter-spacing:3px;text-transform:uppercase;
+  color:var(--teal);font-weight:700;margin-bottom:18px;
+  display:flex;align-items:center;gap:10px;
+}
+.hcp-eyebrow::before{content:'';width:16px;height:1px;background:var(--teal);flex-shrink:0;}
+.hcp-list{display:flex;flex-direction:column;gap:0;}
+.hcp-item{
+  display:flex;align-items:center;gap:10px;
+  padding:11px 0;
+  border-bottom:1px solid rgba(255,255,255,0.05);
+}
+.hcp-item:last-child{border-bottom:none;}
+.hcp-flag{
+  width:28px;height:20px;border-radius:3px;
+  flex-shrink:0;object-fit:cover;
+  transition:transform 0.2s,box-shadow 0.2s;
+  position:relative;
+}
+.hcp-item{position:relative;}
+.hcp-item::before{
+  content:'';
+  position:absolute;
+  left:14px;top:50%;
+  width:0;height:0;
+  border-radius:50%;
+  border:1.5px solid rgba(46,196,216,0.5);
+  transform:translate(-50%,-50%);
+  opacity:0;pointer-events:none;
+}
+.hcp-item:hover::before{animation:countryPulse 0.7s ease-out forwards;}
+.hcp-item:hover .hcp-flag{transform:scale(1.1);box-shadow:0 0 10px rgba(46,196,216,0.3);}
+@keyframes countryPulse{
+  0%{width:0;height:0;opacity:0.8;}
+  100%{width:60px;height:60px;opacity:0;}
+}
+.hcp-name{
+  font-size:14px;font-weight:500;color:var(--text);
+  flex:1;min-width:0;
+}
+.hcp-bar{
+  width:70px;height:2px;
+  background:rgba(255,255,255,0.07);
+  border-radius:1px;flex-shrink:0;overflow:hidden;
+}
+.hcp-bar span{
+  display:block;height:100%;
+  background:linear-gradient(to right,var(--teal-deep),var(--teal));
+  border-radius:1px;
+  transition:width 1s ease;
+}
+.hcp-temp{
+  font-family:'Cormorant Garamond',serif;
+  font-size:22px;font-weight:600;color:var(--teal);
+  width:36px;text-align:right;flex-shrink:0;letter-spacing:-0.5px;
+}
+.hcp-note{
+  font-size:10px;color:var(--text-mute);letter-spacing:0.5px;
+  margin-top:14px;padding-top:12px;
+  border-top:1px solid rgba(255,255,255,0.05);
+}
+
+/* HERO TIMELINE: punta a punta en la parte de abajo */
+.hero-timeline{
+  position:absolute;
+  bottom:0;left:0;right:0;
+  z-index:4;
+  padding:70px 52px 36px;
+  background:linear-gradient(to top,rgba(6,13,18,1) 0%,rgba(6,13,18,0.9) 60%,transparent 100%);
+  pointer-events:none;
+}
+.ht-track{
+  display:flex;align-items:flex-start;
+  width:100%;
+}
+.ht-stop{
+  display:flex;flex-direction:column;align-items:center;
+  flex:1;position:relative;min-width:0;
+}
+.ht-stop-last{flex:0 0 72px;}
+.ht-dot{
+  width:11px;height:11px;border-radius:50%;
+  background:rgba(6,13,18,0.8);
+  border:2px solid rgba(46,196,216,0.7);
+  flex-shrink:0;z-index:3;
+  box-shadow:0 0 6px rgba(46,196,216,0.3);
+  transition:border-color 0.2s,box-shadow 0.2s;
+}
+.ht-dot-special{
+  background:rgba(46,196,216,0.25);
+  border-color:var(--teal);
+  box-shadow:0 0 10px rgba(46,196,216,0.7),0 0 20px rgba(46,196,216,0.3);
+}
+.ht-dot-end{
+  background:rgba(212,160,74,0.25);
+  border-color:var(--gold);
+  box-shadow:0 0 10px rgba(212,160,74,0.7),0 0 20px rgba(212,160,74,0.3);
+}
+
+/* LÍNEAS POR TIPO */
+.ht-line{
+  position:absolute;top:4.5px;left:50%;
+  width:100%;height:2px;z-index:1;
+}
+.ht-land{
+  background:linear-gradient(to right,rgba(46,196,216,0.7),rgba(46,196,216,0.35));
+  box-shadow:0 0 6px rgba(46,196,216,0.2);
+}
+.ht-air{
+  background:none;
+  border-top:2px dashed rgba(46,196,216,0.55);
+}
+.ht-train{
+  background:repeating-linear-gradient(
+    to right,
+    rgba(46,196,216,0.7) 0px,
+    rgba(46,196,216,0.7) 8px,
+    transparent 8px,
+    transparent 12px
+  );
+}
+.ht-bus{
+  background:repeating-linear-gradient(
+    to right,
+    rgba(46,196,216,0.6) 0px,
+    rgba(46,196,216,0.6) 3px,
+    transparent 3px,
+    transparent 9px
+  );
+}
+
+/* BADGE DE TRANSPORTE en el medio de la línea */
+.ht-transport{
+  position:absolute;
+  top:-13px;left:75%;
+  transform:translateX(-50%);
+  z-index:4;
+  width:28px;height:28px;
+  border-radius:50%;
+  background:rgba(6,13,18,0.97);
+  border:1.5px solid rgba(46,196,216,0.5);
+  display:flex;align-items:center;justify-content:center;
+  font-size:14px;
+  line-height:1;
+  box-shadow:0 0 12px rgba(0,0,0,0.6),0 0 8px rgba(46,196,216,0.15);
+  transition:border-color 0.25s,transform 0.2s,box-shadow 0.25s;
+  animation:transportGlow 3s ease-in-out infinite;
+}
+@keyframes transportGlow{
+  0%,100%{box-shadow:0 0 8px rgba(0,0,0,0.6),0 0 6px rgba(46,196,216,0.1);}
+  50%{box-shadow:0 0 12px rgba(0,0,0,0.6),0 0 14px rgba(46,196,216,0.3);}
+}
+.ht-stop:hover .ht-transport{
+  border-color:var(--teal);
+  transform:translateX(-50%) scale(1.25);
+  box-shadow:0 0 12px rgba(0,0,0,0.6),0 0 16px rgba(46,196,216,0.4);
+}
+
+.ht-city{
+  font-family:'Cormorant Garamond',serif;
+  font-size:15px;font-weight:500;color:var(--text);
+  margin-top:14px;text-align:center;white-space:nowrap;
+  overflow:hidden;text-overflow:ellipsis;max-width:100%;
+  text-shadow:0 1px 8px rgba(0,0,0,0.8);
+}
+.ht-date{
+  font-size:11px;color:var(--text-dim);
+  letter-spacing:0.3px;text-align:center;
+  margin-top:4px;white-space:nowrap;
+  text-shadow:0 1px 6px rgba(0,0,0,0.8);
+}
+
+/* LEYENDA MEJORADA */
+.ht-legend{
+  display:flex;gap:24px;margin-top:16px;
+  justify-content:center;
+  flex-wrap:wrap;
+}
+.htl-item{
+  font-size:12px;color:var(--text-dim);
+  display:flex;align-items:center;gap:8px;
+  letter-spacing:0.5px;
+}
+.htl-icon{
+  width:22px;height:22px;border-radius:50%;
+  background:rgba(6,13,18,0.95);
+  border:1px solid rgba(46,196,216,0.35);
+  display:flex;align-items:center;justify-content:center;
+  font-size:12px;
+}
+.htl-line-sample{width:22px;height:2px;flex-shrink:0;}
+.htl-land{background:rgba(46,196,216,0.5);}
+.htl-air{background:none;border-top:1.5px dashed rgba(46,196,216,0.4);}
+.htl-train{
+  background:repeating-linear-gradient(to right,rgba(46,196,216,0.5) 0,rgba(46,196,216,0.5) 5px,transparent 5px,transparent 8px);
+}
+.htl-bus{
+  background:repeating-linear-gradient(to right,rgba(46,196,216,0.45) 0,rgba(46,196,216,0.45) 2px,transparent 2px,transparent 6px);
+}
+
+.hero-pre{
+  display:flex;align-items:center;gap:14px;margin-bottom:22px;
+  animation:fadeUp 0.6s ease 0.15s both;
+}
+.hero-pre-line{
+  width:40px;height:1px;
+  background:linear-gradient(to right,transparent,var(--gold));
+}
+.hero-pre-text{
+  font-size:10px;letter-spacing:4px;text-transform:uppercase;
+  color:var(--teal);font-weight:600;
+}
+
+.hero-title{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(64px,9.5vw,130px);
+  line-height:0.92;font-weight:500;letter-spacing:-1px;
+  margin-bottom:6px;
+  animation:fadeUp 1s ease 0.3s both;
+}
+.hero-title-top{display:block;color:var(--text);}
+.hero-title-bot{
+  display:block;font-style:italic;color:var(--teal);
+  font-size:0.85em;
+}
+
+.hero-tagline{
+  font-size:15px;color:var(--text-dim);line-height:1.75;
+  max-width:460px;margin:22px 0 28px;font-weight:300;
+  animation:fadeUp 0.7s ease 0.5s both;
+  border-left:2px solid var(--teal);
+  padding-left:18px;opacity:0.9;
+}
+
+.hero-stats{
+  display:grid;grid-template-columns:repeat(4,auto);
+  gap:0;width:fit-content;
+  margin-bottom:36px;
+  border:1px solid rgba(46,196,216,0.25);border-radius:10px;overflow:hidden;box-shadow:0 0 40px rgba(46,196,216,0.06);
+  animation:fadeUp 0.6s ease 0.65s both;
+}
+.hero-stat{
+  padding:14px 24px;text-align:center;
+  border-right:1px solid var(--line2);
+}
+.hero-stat:last-child{border-right:none;}
+.stat-val{
+  font-family:'Cormorant Garamond',serif;
+  font-size:28px;font-weight:700;color:var(--text);
+  line-height:1;
+}
+.stat-val em{font-style:italic;color:var(--gold);}
+.stat-lbl{
+  font-size:9px;letter-spacing:2px;text-transform:uppercase;
+  color:var(--text-mute);margin-top:4px;font-weight:500;
+}
+
+.hero-btns{
+  display:flex;gap:12px;
+  animation:fadeUp 0.6s ease 0.8s both;
+}
+.btn-p{
+  padding:14px 36px;border-radius:8px;
+  background:linear-gradient(135deg,var(--teal-mid),var(--teal-deep));
+  color:#fff;border:none;cursor:pointer;
+  font-family:'Outfit',sans-serif;
+  font-size:14px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;
+  transition:transform 0.2s,box-shadow 0.3s;
+  box-shadow:0 0 32px rgba(26,150,170,0.25),inset 0 1px 0 rgba(255,255,255,0.15);
+  position:relative;overflow:hidden;
+}
+.btn-p::after{
+  content:'';position:absolute;
+  top:0;left:-100%;width:55%;height:100%;
+  background:linear-gradient(to right,transparent,rgba(255,255,255,0.18),transparent);
+  transform:skewX(-20deg);
+  transition:left 0.55s ease;
+}
+.btn-p:hover{transform:translateY(-2px);box-shadow:0 6px 50px rgba(46,196,216,0.45),inset 0 1px 0 rgba(255,255,255,0.2);}
+.btn-p:hover::after{left:160%;}
+.btn-p:active{transform:translateY(0);transition:transform 0.05s;}
+
+.btn-s{
+  padding:14px 36px;border-radius:8px;
+  background:transparent;
+  color:var(--text);
+  border:1px solid rgba(46,196,216,0.25);
+  cursor:pointer;
+  font-family:'Outfit',sans-serif;
+  font-size:14px;font-weight:500;letter-spacing:1px;text-transform:uppercase;
+  transition:border-color 0.25s,color 0.25s,transform 0.2s,box-shadow 0.3s;
+  backdrop-filter:blur(10px);
+  position:relative;overflow:hidden;
+}
+.btn-s::before{
+  content:'';position:absolute;inset:0;
+  background:rgba(46,196,216,0.07);
+  transform:scaleX(0);transform-origin:left;
+  transition:transform 0.3s cubic-bezier(0.4,0,0.2,1);
+}
+.btn-s:hover{border-color:var(--teal);color:var(--teal);transform:translateY(-2px);box-shadow:0 4px 24px rgba(46,196,216,0.15);}
+.btn-s:hover::before{transform:scaleX(1);}
+.btn-s:active{transform:translateY(0);transition:transform 0.05s;}
+
+.hero-scroll{
+  position:absolute;bottom:32px;left:52px;
+  display:flex;align-items:center;gap:10px;z-index:3;
+  animation:fadeIn 0.8s ease 1.4s both;
+}
+.scroll-dot{
+  width:6px;height:6px;border-radius:50%;
+  background:var(--gold);
+  animation:pulse 2s ease infinite;
+}
+@keyframes pulse{0%,100%{opacity:0.3;transform:scale(1);}50%{opacity:1;transform:scale(1.3);}}
+.hero-scroll span{
+  font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--text-mute);
+}
+
+/* CATALOG */
+.catalog{padding-bottom:80px;}
+.row{padding:44px 0 8px;}
+.row-head{
+  padding:0 52px 22px;
+  display:flex;align-items:center;gap:16px;
+}
+.row-num{
+  font-family:'Cormorant Garamond',serif;
+  font-size:13px;color:var(--teal);letter-spacing:1px;
+  border:1px solid rgba(46,196,216,0.4);
+  background:rgba(46,196,216,0.08);
+  padding:2px 10px;border-radius:100px;
+}
+.row-title{
+  font-family:'Cormorant Garamond',serif;
+  font-size:36px;font-weight:500;
+}
+.row-title em{font-style:italic;color:var(--gold);}
+.row-sub{font-size:11px;color:var(--text-dim);letter-spacing:0.3px;margin-left:auto;}
+
+/* SCROLL CONTAINER */
+.cards-scroll{
+  display:flex;gap:14px;
+  padding:0 52px 16px;
+  overflow-x:auto;
+  scrollbar-width:none;
+  -webkit-overflow-scrolling:touch;
+  scroll-snap-type:x mandatory;
+}
+.cards-scroll::-webkit-scrollbar{display:none;}
+
+/* DEST CARDS */
+.dest-card{
+  flex:0 0 250px;height:155px;
+  border-radius:var(--r);position:relative;
+  cursor:pointer;overflow:hidden;
+  transition:transform 0.35s cubic-bezier(0.4,0,0.2,1),box-shadow 0.35s;
+  scroll-snap-align:start;
+}
+.dest-card::before{
+  content:'';position:absolute;inset:0;
+  background:url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M20 2 L38 20 L20 38 L2 20 Z' fill='none' stroke='rgba(255%2C255%2C255%2C0.04)' stroke-width='0.5'/%3E%3Cpath d='M20 10 L30 20 L20 30 L10 20 Z' fill='none' stroke='rgba(255%2C255%2C255%2C0.03)' stroke-width='0.5'/%3E%3C/svg%3E");
+  z-index:2;opacity:1;
+}
+.dest-card:hover{
+  transform:translateY(-8px) scale(1.03);
+  box-shadow:0 24px 70px rgba(0,0,0,0.75),0 0 0 1px rgba(255,255,255,0.1);
+  z-index:10;
+}
+.dest-card.active{
+  box-shadow:0 0 0 2px var(--teal),0 20px 60px rgba(0,0,0,0.7);
+}
+.dest-bg{position:absolute;inset:0;}
+.dest-shine{
+  position:absolute;inset:0;z-index:3;
+  background:radial-gradient(ellipse at 50% -10%,rgba(255,255,255,0.1) 0%,transparent 55%);
+  opacity:0;transition:opacity 0.4s;
+}
+.dest-card:hover .dest-shine{opacity:1;}
+.dest-vignette{
+  position:absolute;inset:0;z-index:4;
+  background:linear-gradient(170deg,rgba(0,0,0,0.1) 0%,rgba(0,0,0,0.8) 65%,rgba(0,0,0,0.95) 100%);
+}
+.dest-accent{
+  position:absolute;top:12px;right:14px;z-index:5;
+  width:6px;height:6px;border-radius:50%;
+  transition:transform 0.3s;
+}
+.dest-card:hover .dest-accent{transform:scale(1.5);}
+.dest-ord{
+  position:absolute;bottom:14px;right:14px;z-index:5;
+  font-family:'Cormorant Garamond',serif;
+  font-size:44px;font-weight:700;
+  color:rgba(255,255,255,0.06);
+  line-height:1;letter-spacing:-1px;
+}
+.dest-content{
+  position:absolute;bottom:0;left:0;right:0;z-index:6;
+  padding:14px 16px;
+}
+.dest-pais{
+  font-size:9px;letter-spacing:3px;text-transform:uppercase;
+  color:rgba(255,255,255,0.7);margin-bottom:4px;font-weight:600;
+}
+.dest-name{
+  font-family:'Cormorant Garamond',serif;
+  font-size:26px;font-weight:700;color:#fff;
+  line-height:1;letter-spacing:0.3px;text-shadow:0 2px 12px rgba(0,0,0,0.8);
+}
+.dest-dias{
+  font-size:10px;color:rgba(255,255,255,0.65);
+  margin-top:5px;letter-spacing:0.5px;
+}
+/* Card entrance animation */
+.dest-card{animation:cardFadeIn 0.5s ease both;}
+.dest-card:nth-child(1){animation-delay:0.05s;}
+.dest-card:nth-child(2){animation-delay:0.1s;}
+.dest-card:nth-child(3){animation-delay:0.15s;}
+.dest-card:nth-child(4){animation-delay:0.2s;}
+.dest-card:nth-child(5){animation-delay:0.25s;}
+.dest-card:nth-child(6){animation-delay:0.3s;}
+.dest-card:nth-child(7){animation-delay:0.35s;}
+.dest-card:nth-child(8){animation-delay:0.4s;}
+@keyframes cardFadeIn{from{opacity:0;transform:translateY(16px);}to{opacity:1;transform:translateY(0);}}
+
+/* INFO CARDS */
+.info-card{
+  flex:0 0 215px;height:155px;border-radius:var(--r);
+  background:var(--bg2);
+  border:1px solid var(--line);cursor:pointer;
+  padding:22px 20px;
+  display:flex;flex-direction:column;justify-content:space-between;
+  transition:background 0.25s,border-color 0.25s,transform 0.25s,box-shadow 0.25s;
+  scroll-snap-align:start;position:relative;overflow:visible;
+}
+.info-card::before{
+  content:'';position:absolute;
+  top:0;left:0;right:0;height:2px;
+  background:linear-gradient(to right,transparent,var(--teal),transparent);
+  opacity:0;transition:opacity 0.3s;
+}
+.info-card:hover{
+  background:var(--bg3);border-color:rgba(46,196,216,0.25);
+  transform:translateY(-5px);
+  box-shadow:0 16px 48px rgba(0,0,0,0.5),0 0 0 1px rgba(46,196,216,0.1);
+}
+.info-card:hover::before{opacity:1;}
+.info-card:hover .info-icon{transform:scale(1.15);transition:transform 0.25s;}
+.info-card.active{border-color:var(--teal);}
+.info-card.active::before{opacity:1;}
+.info-icon{
+  transition:transform 0.25s;
+  position:relative;display:inline-block;
+}
+.info-icon::before,.info-icon::after{
+  content:'';
+  position:absolute;
+  top:50%;left:50%;
+  width:36px;height:36px;
+  border-radius:50%;
+  border:1.5px solid rgba(46,196,216,0.5);
+  transform:translate(-50%,-50%) scale(0);
+  opacity:0;
+  pointer-events:none;
+}
+.info-card:hover .info-icon::before{
+  animation:iconRing 0.9s ease-out forwards;
+}
+.info-card:hover .info-icon::after{
+  animation:iconRing 0.9s ease-out 0.25s forwards;
+}
+@keyframes iconRing{
+  0%{transform:translate(-50%,-50%) scale(0.3);opacity:0.8;}
+  100%{transform:translate(-50%,-50%) scale(2.8);opacity:0;}
+}
+.info-icon{font-size:28px;line-height:1;}
+.info-title{
+  font-family:'Cormorant Garamond',serif;
+  font-size:22px;font-weight:600;color:var(--text);line-height:1.2;
+  margin-bottom:3px;
+}
+.info-sub{font-size:13px;color:var(--text-dim);letter-spacing:0.3px;}
+
+/* SECTION DIVIDER */
+.section-div{
+  display:flex;align-items:center;gap:20px;
+  padding:0 52px;margin-bottom:0;
+}
+.div-line{flex:1;height:1px;background:var(--line);}
+.div-text{
+  font-size:9px;letter-spacing:3px;text-transform:uppercase;
+  color:var(--text-mute);font-weight:500;
+}
+
+/* SHEET BACKDROP */
+.backdrop{
+  position:fixed;inset:0;background:rgba(0,0,0,0);
+  z-index:700;pointer-events:none;transition:background 0.35s;
+}
+.backdrop.open{
+  background:rgba(0,0,0,0.8);
+  backdrop-filter:blur(6px);pointer-events:all;
+}
+
+/* SHEET */
+.sheet{
+  position:fixed;bottom:0;left:0;right:0;height:90vh;
+  background:rgba(8,14,18,0.97);
+  backdrop-filter:blur(50px) saturate(200%);
+  -webkit-backdrop-filter:blur(50px) saturate(200%);
+  border-radius:18px 18px 0 0;
+  border-top:1px solid rgba(255,255,255,0.12);
+  z-index:701;
+  transform:translateY(100%);
+  transition:transform 0.42s cubic-bezier(0.4,0,0.2,1);
+  overflow:hidden;display:flex;flex-direction:column;
+}
+.sheet.open{transform:translateY(0);}
+.sheet-glow{
+  position:absolute;top:0;left:0;right:0;height:180px;
+  opacity:0.12;pointer-events:none;z-index:0;
+  transition:background 0.4s;
+}
+.sheet-handle{
+  width:32px;height:3px;background:rgba(255,255,255,0.15);
+  border-radius:2px;margin:12px auto 0;flex-shrink:0;
+  position:relative;z-index:1;cursor:grab;
+}
+.sheet-header{
+  padding:18px 36px 16px;flex-shrink:0;
+  border-bottom:1px solid var(--line);
+  position:relative;z-index:1;
+}
+.sheet-eyebrow{
+  font-size:9px;letter-spacing:3px;text-transform:uppercase;
+  color:var(--gold);font-weight:600;margin-bottom:5px;
+}
+.sheet-title{
+  font-family:'Cormorant Garamond',serif;
+  font-size:40px;font-weight:500;letter-spacing:0;line-height:1;
+}
+.sheet-title em{font-style:italic;color:var(--gold);}
+.sheet-meta{display:flex;gap:8px;margin-top:12px;flex-wrap:wrap;}
+.sheet-pill{
+  background:rgba(255,255,255,0.06);
+  border:1px solid rgba(255,255,255,0.1);
+  border-radius:100px;padding:4px 12px;
+  font-size:11px;color:var(--text-dim);
+}
+.sheet-close{
+  position:absolute;top:18px;right:24px;
+  background:rgba(255,255,255,0.07);
+  border:1px solid rgba(255,255,255,0.1);
+  color:var(--text-dim);width:30px;height:30px;
+  border-radius:50%;font-size:16px;
+  cursor:pointer;display:flex;align-items:center;justify-content:center;
+  transition:background 0.2s,color 0.2s;z-index:2;
+}
+.sheet-close:hover{background:rgba(255,255,255,0.14);color:var(--text);}
+
+/* SHEET BODY */
+.sheet-body{
+  flex:1;overflow-y:auto;padding:0 36px 48px;
+  scrollbar-width:thin;scrollbar-color:rgba(255,255,255,0.08) transparent;
+  position:relative;z-index:1;
+}
+.sheet-body::-webkit-scrollbar{width:3px;}
+.sheet-body::-webkit-scrollbar-thumb{background:rgba(255,255,255,0.08);border-radius:2px;}
+
+.sheet-tabs{
+  display:flex;gap:0;
+  border-bottom:1px solid var(--line);
+  margin-bottom:28px;
+  position:sticky;top:0;
+  background:rgba(8,14,18,0.97);
+  backdrop-filter:blur(10px);
+  z-index:10;padding-top:20px;
+}
+.sheet-tab{
+  padding:10px 22px;font-size:11px;
+  letter-spacing:2px;text-transform:uppercase;font-weight:600;
+  color:var(--text-mute);cursor:pointer;
+  border-bottom:2px solid transparent;margin-bottom:-1px;
+  transition:color 0.2s,border-color 0.2s;
+}
+.sheet-tab.active{color:var(--teal);border-bottom-color:var(--teal);}
+.sheet-tab-content{display:none;}
+.sheet-tab-content.active{display:block;}
+
+/* COSA ITEMS */
+.cosa-item{
+  display:flex;gap:22px;padding:22px 0;
+  border-bottom:1px solid var(--line);
+}
+.cosa-item:last-child{border-bottom:none;}
+.cosa-num{
+  font-family:'Cormorant Garamond',serif;
+  font-size:28px;font-weight:700;
+  color:rgba(46,196,216,0.45);
+  width:36px;flex-shrink:0;line-height:1;padding-top:1px;
+}
+.cosa-h{font-size:16px;font-weight:600;color:var(--text);margin-bottom:6px;line-height:1.3;}
+.cosa-p{font-size:14px;color:var(--text-dim);line-height:1.7;}
+.pin-link{
+  display:inline-flex;align-items:center;gap:6px;
+  margin-top:10px;font-size:10px;font-weight:600;
+  letter-spacing:2px;text-transform:uppercase;
+  color:var(--teal);text-decoration:none;
+  border:1px solid rgba(46,196,216,0.3);
+  padding:4px 14px;border-radius:100px;
+  transition:background 0.2s,border-color 0.2s,box-shadow 0.2s,transform 0.15s;
+}
+.pin-link:hover{
+  background:rgba(46,196,216,0.12);border-color:var(--teal);
+  box-shadow:0 0 12px rgba(46,196,216,0.2);
+  transform:translateY(-1px);
+}
+
+/* DIAS */
+.dia-item{padding:22px 0;border-bottom:1px solid var(--line);}
+.dia-item:last-child{border-bottom:none;}
+.dia-num-badge{
+  font-size:9px;letter-spacing:3px;text-transform:uppercase;
+  color:var(--text-mute);margin-bottom:6px;font-weight:600;
+}
+.dia-titulo{
+  font-family:'Cormorant Garamond',serif;
+  font-size:28px;font-weight:600;color:var(--text);
+  margin-bottom:8px;line-height:1.2;
+}
+.dia-titulo em{font-style:italic;color:var(--gold);}
+.dia-desc{font-size:15px;color:var(--text-dim);line-height:1.7;margin-bottom:8px;}
+.dia-clima{font-size:11px;color:var(--teal);letter-spacing:0.5px;}
+.dia-tags-wrap{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px;}
+.dia-tag{
+  font-size:9px;letter-spacing:1px;font-weight:600;
+  padding:3px 10px;border-radius:100px;
+  background:rgba(255,255,255,0.04);
+  border:1px solid rgba(255,255,255,0.08);
+  color:var(--text-mute);text-transform:uppercase;
+}
+.dia-tag.gold{background:rgba(212,168,92,0.1);border-color:rgba(212,168,92,0.2);color:var(--gold);}
+.dia-tag.teal{background:rgba(42,191,212,0.08);border-color:rgba(42,191,212,0.18);color:var(--teal);}
+.dia-tag.terra{background:rgba(200,100,50,0.08);border-color:rgba(200,100,50,0.18);color:#d87840;}
+
+/* PAISES */
+.paises-grid{
+  display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:12px;
+}
+.pais-card{background:var(--bg2);border:1px solid var(--line);border-radius:var(--r);padding:20px;}
+.pais-flag{font-size:26px;margin-bottom:10px;}
+.pais-nombre{
+  font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:700;
+  margin-bottom:14px;color:var(--text);
+}
+.pais-dato{
+  display:flex;justify-content:space-between;align-items:flex-start;
+  padding:6px 0;border-bottom:1px solid var(--line);font-size:12px;
+}
+.pais-dato:last-child{border-bottom:none;}
+.pais-dato-label{color:var(--text-dim);font-size:11px;letter-spacing:0.5px;text-transform:uppercase;}
+.pais-dato-valor{color:var(--text);font-weight:500;text-align:right;max-width:55%;font-size:14px;}
+
+/* LLEVAR */
+.llevar-section{margin-bottom:32px;}
+.llevar-h{
+  font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:600;
+  color:var(--gold);margin-bottom:14px;padding-bottom:10px;
+  border-bottom:1px solid var(--line);
+}
+.llevar-list{list-style:none;}
+.llevar-list li{
+  display:flex;align-items:flex-start;gap:12px;
+  font-size:15px;color:var(--text-dim);
+  padding:10px 0;border-bottom:1px solid var(--line);line-height:1.6;
+}
+.llevar-list li:last-child{border-bottom:none;}
+.llevar-list li::before{
+  content:'';width:4px;height:4px;border-radius:50%;
+  background:var(--teal-mid);flex-shrink:0;margin-top:6px;
+}
+
+/* VUELOS */
+.vuelo-item{display:flex;gap:18px;padding:20px 0;border-bottom:1px solid var(--line);}
+.vuelo-item:last-child{border-bottom:none;}
+.vuelo-ico{font-size:22px;margin-top:2px;}
+.vuelo-dia{
+  font-size:9px;letter-spacing:2px;text-transform:uppercase;
+  color:var(--text-mute);margin-bottom:5px;font-weight:600;
+}
+.vuelo-ruta{font-size:18px;font-weight:500;color:var(--text);margin-bottom:5px;}
+.vuelo-nota{font-size:15px;color:var(--text-dim);line-height:1.6;}
+
+/* CALLOUT */
+.callout{
+  margin-top:24px;padding:18px 20px;
+  background:rgba(42,191,212,0.05);
+  border-left:2px solid var(--teal);border-radius:0 8px 8px 0;
+}
+.callout p{font-size:13px;color:var(--text-dim);line-height:1.65;}
+.callout strong{color:var(--text);}
+
+/* MAPA SECTION */
+.mapa-section{
+  padding:80px 52px 0;
+  position:relative;
+  overflow:hidden;
+}
+.mapa-inner{
+  max-width:1100px;
+  margin:0 auto;
+}
+.mapa-section-top{
+  display:grid;grid-template-columns:1fr auto auto;
+  align-items:flex-end;gap:32px;
+  margin-bottom:36px;
+}
+.mapa-section-num{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(100px,14vw,180px);
+  font-weight:300;line-height:0.85;
+  color:transparent;
+  -webkit-text-stroke:1px rgba(46,196,216,0.12);
+  pointer-events:none;user-select:none;
+  position:absolute;right:52px;top:60px;
+  letter-spacing:-4px;
+}
+.mapa-eyebrow{
+  font-size:9px;letter-spacing:4px;text-transform:uppercase;
+  color:var(--teal);font-weight:600;margin-bottom:12px;
+  display:flex;align-items:center;gap:10px;
+}
+.mapa-eyebrow::before{content:'';width:24px;height:1px;background:var(--teal);}
+.mapa-title{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(40px,5vw,58px);
+  font-weight:400;margin-bottom:8px;letter-spacing:0;
+  line-height:1;
+}
+.mapa-title em{font-style:italic;color:var(--gold);}
+.mapa-sub{font-size:14px;color:var(--text-dim);margin-bottom:0;letter-spacing:0.2px;}
+.mapa-stats{
+  display:flex;flex-direction:column;align-items:flex-end;gap:6px;
+  flex-shrink:0;
+}
+.mapa-stat-item{
+  display:flex;align-items:center;gap:8px;
+}
+.mapa-stat-val{
+  font-family:'Cormorant Garamond',serif;
+  font-size:22px;font-weight:500;color:var(--text);
+}
+.mapa-stat-lbl{
+  font-size:10px;letter-spacing:1.5px;text-transform:uppercase;
+  color:var(--text-mute);
+}
+.mapa-stat-dot{
+  width:6px;height:6px;border-radius:50%;
+  background:var(--teal);flex-shrink:0;
+}
+.mapa-wrap{
+  background:linear-gradient(160deg,rgba(6,18,28,0.95) 0%,rgba(4,14,22,0.98) 100%);
+  border:1px solid rgba(46,196,216,0.15);border-radius:14px;
+  padding:32px 24px;
+  position:relative;overflow:hidden;
+  box-shadow:0 0 60px rgba(0,0,0,0.5),inset 0 1px 0 rgba(46,196,216,0.08);
+}
+.mapa-wrap::before{
+  content:'';position:absolute;inset:0;
+  background-image:radial-gradient(circle,rgba(46,196,216,0.06) 1px,transparent 1px);
+  background-size:28px 28px;
+  pointer-events:none;
+}
+.mapa-svg{width:100%;height:auto;display:block;font-family:'Outfit',sans-serif;}
+
+/* Rutas con animación de dibujo */
+.mapa-svg .ruta-terrestre{
+  stroke:var(--teal);stroke-width:2;fill:none;
+  stroke-dasharray:300;stroke-dashoffset:300;
+  opacity:0.6;
+}
+.mapa-svg .ruta-vuelo{
+  stroke:var(--teal);stroke-width:1.5;fill:none;
+  stroke-dasharray:6,5;
+  stroke-dashoffset:200;
+  opacity:0.35;
+}
+.mapa-wrap.anim-in .ruta-terrestre{
+  animation:drawRoute 1.8s ease forwards;
+}
+.mapa-wrap.anim-in .ruta-vuelo{
+  animation:drawRoute 2.2s ease 0.4s forwards;
+}
+@keyframes drawRoute{
+  to{stroke-dashoffset:0;}
+}
+
+/* Pines */
+.mapa-svg .pin-pulse{
+  fill:none;stroke:var(--teal);stroke-width:1;
+  transform-origin:center;transform-box:fill-box;
+  animation:pinPulse 2.5s ease-in-out infinite;
+  opacity:0;
+}
+@keyframes pinPulse{
+  0%{r:13px;opacity:0.6;}
+  100%{r:24px;opacity:0;}
+}
+.mapa-svg .pin-circle{
+  fill:var(--teal-deep);
+  stroke:var(--teal);stroke-width:1.5;
+  cursor:pointer;
+  transition:fill 0.25s,r 0.2s;
+  filter:drop-shadow(0 0 4px rgba(46,196,216,0.3));
+}
+.mapa-svg .pin-group:hover .pin-circle{
+  fill:var(--gold-dim);
+  filter:drop-shadow(0 0 8px rgba(212,160,74,0.5));
+}
+.mapa-svg .pin-group.active .pin-circle{
+  fill:var(--gold);
+  filter:drop-shadow(0 0 10px rgba(212,160,74,0.7));
+}
+.mapa-svg .pin-num{fill:#fff;font-size:11px;font-weight:700;pointer-events:none;text-anchor:middle;}
+
+/* Labels con fondo semitransparente */
+.mapa-svg .pin-label-bg{fill:rgba(4,14,22,0.7);rx:3;ry:3;}
+.mapa-svg .pin-label{
+  fill:rgba(240,235,224,0.95);font-size:11px;font-weight:600;
+  pointer-events:none;
+}
+.mapa-svg .pais-label{
+  fill:rgba(46,196,216,0.4);font-size:9px;font-style:italic;
+  pointer-events:none;letter-spacing:2px;text-transform:uppercase;
+}
+.mapa-panel{
+  margin-top:0;padding:20px 28px;
+  background:rgba(6,18,28,0.8);
+  border-top:1px solid rgba(46,196,216,0.15);
+  border-radius:0 0 14px 14px;
+  min-height:56px;
+  display:flex;align-items:center;gap:20px;
+}
+.mapa-panel-inner{flex:1;}
+.mapa-panel-title{
+  font-family:'Cormorant Garamond',serif;
+  font-size:26px;font-weight:400;color:var(--teal);
+  margin-bottom:2px;
+}
+.mapa-panel-meta{
+  font-size:9px;letter-spacing:2px;text-transform:uppercase;
+  color:var(--text-mute);margin-bottom:6px;
+}
+.mapa-panel-desc{font-size:15px;color:var(--text-dim);line-height:1.5;}
+.mapa-panel-hint{
+  font-size:13px;color:var(--text-mute);
+  display:flex;align-items:center;gap:8px;
+}
+.mapa-panel-hint::before{
+  content:'';width:6px;height:6px;border-radius:50%;
+  background:var(--teal);opacity:0.4;flex-shrink:0;
+  animation:pulse 2s ease infinite;
+}
+.mapa-top-btn{
+  display:flex;flex-direction:column;align-items:flex-end;gap:6px;
+  flex-shrink:0;
+}
+.mapa-top-btn-note{
+  font-size:10px;color:var(--text-mute);letter-spacing:0.5px;text-align:right;
+}
+.mapa-btn-wrap{
+  display:flex;justify-content:center;
+  padding:0 0 60px;
+  border-bottom:1px solid var(--line);
+}
+.mapa-btn-caption{
+  font-size:12px;color:var(--text-mute);letter-spacing:0.5px;
+}
+.mapa-btn{
+  display:inline-flex;align-items:center;gap:8px;
+  font-size:10px;letter-spacing:2.5px;text-transform:uppercase;font-weight:600;
+  color:var(--text-dim);text-decoration:none;
+  border:1px solid rgba(46,196,216,0.2);padding:11px 28px;border-radius:100px;
+  transition:color 0.25s,border-color 0.25s,box-shadow 0.3s,transform 0.2s;
+  position:relative;overflow:hidden;
+}
+.mapa-btn::before{
+  content:'';position:absolute;inset:0;border-radius:100px;
+  background:rgba(46,196,216,0.06);
+  transform:scaleX(0);transform-origin:left;
+  transition:transform 0.3s ease;
+}
+.mapa-btn:hover{
+  color:var(--teal);border-color:var(--teal);
+  box-shadow:0 0 20px rgba(46,196,216,0.15);
+  transform:translateY(-1px);
+}
+.mapa-btn:hover::before{transform:scaleX(1);}
+
+/* FOOTER */
+.footer{
+  padding:32px 52px;
+  border-top:1px solid var(--line);
+  background:linear-gradient(to bottom,transparent,rgba(6,13,18,0.5));
+}
+.footer-inner{
+  display:flex;align-items:center;justify-content:space-between;
+}
+.footer-brand{
+  display:flex;align-items:center;gap:10px;
+  font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--text-mute);
+}
+.footer-logo{
+  width:24px;height:24px;border-radius:4px;
+  background:linear-gradient(135deg,var(--teal-deep),var(--teal-mid));
+  display:inline-flex;align-items:center;justify-content:center;
+  font-family:'Cormorant Garamond',serif;font-size:12px;font-weight:600;color:#fff;
+}
+.footer-center{
+  font-size:11px;letter-spacing:1.5px;text-transform:uppercase;
+  color:var(--text-mute);
+}
+.footer-link{
+  font-size:11px;letter-spacing:1.5px;text-transform:uppercase;
+  color:var(--teal);text-decoration:none;opacity:0.7;
+  transition:opacity 0.2s;
+}
+.footer-link:hover{opacity:1;}
+@media(max-width:768px){
+  .footer-inner{flex-direction:column;gap:12px;text-align:center;}
+  .mapa-section{padding:50px 20px 0;}
+  .mapa-section-top{grid-template-columns:1fr;gap:12px;}
+  .mapa-top-btn{align-items:flex-start;}
+  .mapa-stats{flex-direction:row;align-items:center;}
+  .mapa-btn-wrap{flex-direction:column;gap:12px;align-items:center;padding:20px 0 40px;}
+  .mapa-btn-caption{text-align:center;}
+}
+
+/* ANIMATIONS */
+@keyframes fadeUp{
+  from{opacity:0;transform:translateY(20px);}
+  to{opacity:1;transform:translateY(0);}
+}
+@keyframes fadeIn{from{opacity:0;}to{opacity:1;}}
+
+/* RESPONSIVE */
+@media(max-width:768px){
+  .nav{padding:13px 20px;gap:12px;}
+  .nav.solid{padding:10px 20px;}
+  .nav-links a{font-size:9px;padding:5px 9px;}
+  .nav-logo-mark{display:none;}
+  .hero{padding:0 20px 65px;min-height:88vh;}
+  .hero-content{flex-direction:column;gap:28px;}
+  .nav-rule,.nav-links{display:none;}
+  .hero-right{display:none;}
+  .hero-content{grid-template-columns:1fr;padding-bottom:110px;margin:0;max-width:none;}
+  .hero-timeline{padding:40px 20px 20px;}
+  .ht-city{font-size:10px;}
+  .ht-date{font-size:8px;}
+  .hero-wm{font-size:clamp(130px,35vw,220px);}
+  .hero-countries{display:none;}
+  .hero-stats{grid-template-columns:repeat(2,auto);}
+  .hero-btns{flex-direction:column;gap:10px;}
+  .btn-p,.btn-s{text-align:center;}
+  .row-head{padding:0 20px 16px;}
+  .cards-scroll{padding:0 20px 12px;}
+  .dest-card{flex:0 0 185px;height:120px;}
+  .info-card{flex:0 0 155px;height:130px;}
+  .info-title{font-size:16px;}
+  .info-sub{font-size:11px;}
+  .section-div{padding:0 20px;}
+  .sheet-header{padding:14px 22px 12px;}
+  .sheet-body{padding:0 22px 40px;}
+  .sheet-title{font-size:32px;}
+  .sheet-tabs{padding-top:16px;}
+  .paises-grid{grid-template-columns:1fr;}
+  .mapa-section{padding:50px 20px 60px;}
+  .mapa-title{font-size:38px;}
+  .footer{padding:32px 20px;}
+  .hero-scroll{left:20px;}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav" id="main-nav">
+  <div class="nav-logo">
+    <img src="https://volateadventures.com/wp-content/uploads/2021/05/logo-volate.jpg" alt="Volate" style="height:30px;width:auto;border-radius:3px;" onerror="this.style.display='none'"><div class="nav-logo-mark" style="display:none;">V</div>
+    <div class="nav-brand">Volate <em>Adventures</em></div>
+  </div>
+  <div class="nav-rule"></div>
+  <div class="nav-links">
+    <a onclick="openInfoSheet('itinerario')">Itinerario</a>
+    <a onclick="openInfoSheet('paises')">Países</a>
+    <a onclick="openInfoSheet('llevar')">Qué llevar</a>
+    <a onclick="openInfoSheet('vuelos')">Vuelos</a>
+    <a onclick="document.getElementById('mapa-section').scrollIntoView({behavior:'smooth'})">Mapa</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-mesh"></div>
+  <div class="hero-vignette"></div>
+  <div class="hero-wm">18</div>
+  <div class="hero-countries">
+    <div class="hero-country">Kazakhstan</div>
+    <div class="hero-country">Kyrgyzstan</div>
+    <div class="hero-country">Uzbekistan</div>
+    <div class="hero-country">Tajikistan</div>
+    <div class="hero-country">Georgia</div>
+    <div class="hero-country">Armenia</div>
+  </div>
+  <div class="hero-content">
+    <div class="hero-left">
+      <h1 class="hero-title">
+        <span class="hero-title-top">Ruta de la</span>
+        <span class="hero-title-bot">Seda</span>
+      </h1>
+      <div class="hero-pre">
+        <div class="hero-pre-line"></div>
+        <div class="hero-pre-text">Expedición · Asia Central · Cáucaso</div>
+      </div>
+      <p class="hero-tagline">De Almaty a Ereván siguiendo el camino milenario que unió oriente y occidente. Bazares de especias, cúpulas turquesas, desiertos infinitos.</p>
+      <div class="hero-stats">
+        <div class="hero-stat">
+          <div class="stat-val">18</div>
+          <div class="stat-lbl">Días</div>
+        </div>
+        <div class="hero-stat">
+          <div class="stat-val">6</div>
+          <div class="stat-lbl">Países</div>
+        </div>
+        <div class="hero-stat">
+          <div class="stat-val"><em>Jun</em></div>
+          <div class="stat-lbl">2026</div>
+        </div>
+        <div class="hero-stat">
+          <div class="stat-val">5–12</div>
+          <div class="stat-lbl">Viajeros</div>
+        </div>
+      </div>
+      <div class="hero-btns">
+        <button class="btn-p" onclick="(() => { const el = document.getElementById('destinos-row'); if(el){ window.scrollTo({top: el.closest('section').offsetTop - 20, behavior:'smooth'}); } })()">▶&nbsp;&nbsp;Ver destinos</button>
+        <button class="btn-s" onclick="openInfoSheet('itinerario')">≡&nbsp;&nbsp;Itinerario</button>
+      </div>
+    </div>
+
+    <!-- PANEL DERECHO: países + temperaturas (solo desktop) -->
+    <div class="hero-right">
+      <div class="hcp-eyebrow">Clima en junio</div>
+      <div class="hcp-list">
+        <div class="hcp-item">
+          <img class="hcp-flag" src="https://flagcdn.com/w40/kz.png" alt="Kazajistán">
+          <span class="hcp-name">Kazajistán</span>
+          <span class="hcp-bar"><span style="width:52%"></span></span>
+          <span class="hcp-temp">25°</span>
+        </div>
+        <div class="hcp-item">
+          <img class="hcp-flag" src="https://flagcdn.com/w40/kg.png" alt="Kirguistán">
+          <span class="hcp-name">Kirguistán</span>
+          <span class="hcp-bar"><span style="width:50%"></span></span>
+          <span class="hcp-temp">25°</span>
+        </div>
+        <div class="hcp-item">
+          <img class="hcp-flag" src="https://flagcdn.com/w40/uz.png" alt="Uzbekistán">
+          <span class="hcp-name">Uzbekistán</span>
+          <span class="hcp-bar"><span style="width:72%"></span></span>
+          <span class="hcp-temp">32°</span>
+        </div>
+        <div class="hcp-item">
+          <img class="hcp-flag" src="https://flagcdn.com/w40/tj.png" alt="Tayikistán">
+          <span class="hcp-name">Tayikistán</span>
+          <span class="hcp-bar"><span style="width:48%"></span></span>
+          <span class="hcp-temp">24°</span>
+        </div>
+        <div class="hcp-item">
+          <img class="hcp-flag" src="https://flagcdn.com/w40/ge.png" alt="Georgia">
+          <span class="hcp-name">Georgia</span>
+          <span class="hcp-bar"><span style="width:58%"></span></span>
+          <span class="hcp-temp">27°</span>
+        </div>
+        <div class="hcp-item">
+          <img class="hcp-flag" src="https://flagcdn.com/w40/am.png" alt="Armenia">
+          <span class="hcp-name">Armenia</span>
+          <span class="hcp-bar"><span style="width:62%"></span></span>
+          <span class="hcp-temp">28°</span>
+        </div>
+      </div>
+      <div class="hcp-note">Temperaturas diurnas promedio</div>
+    </div>
+  </div>
+
+  <!-- TIMELINE DE DESTINOS: corre de punta a punta abajo del hero -->
+  <div class="hero-timeline">
+    <div class="ht-track">
+
+      <div class="ht-stop">
+        <div class="ht-dot"></div>
+        <div class="ht-line ht-land"></div>
+        <div class="ht-transport" title="Carretera">🚗</div>
+        <div class="ht-city">Almaty</div>
+        <div class="ht-date">1–2 jun</div>
+      </div>
+
+      <div class="ht-stop">
+        <div class="ht-dot"></div>
+        <div class="ht-line ht-air"></div>
+        <div class="ht-transport" title="Vuelo">✈️</div>
+        <div class="ht-city">Bishkek</div>
+        <div class="ht-date">3 jun</div>
+      </div>
+
+      <div class="ht-stop">
+        <div class="ht-dot"></div>
+        <div class="ht-line ht-train"></div>
+        <div class="ht-transport" title="Tren">🚂</div>
+        <div class="ht-city">Taskent</div>
+        <div class="ht-date">4–5 jun</div>
+      </div>
+
+      <div class="ht-stop">
+        <div class="ht-dot"></div>
+        <div class="ht-line ht-bus"></div>
+        <div class="ht-transport" title="Bus">🚌</div>
+        <div class="ht-city">Samarcanda</div>
+        <div class="ht-date">6–8 jun</div>
+      </div>
+
+      <div class="ht-stop">
+        <div class="ht-dot"></div>
+        <div class="ht-line ht-bus"></div>
+        <div class="ht-transport" title="Bus">🚌</div>
+        <div class="ht-city">Bujará</div>
+        <div class="ht-date">9 jun</div>
+      </div>
+
+      <div class="ht-stop">
+        <div class="ht-dot ht-dot-special"></div>
+        <div class="ht-line ht-air"></div>
+        <div class="ht-transport" title="Vuelo">✈️</div>
+        <div class="ht-city">Kyzyl Kum</div>
+        <div class="ht-date">10 jun · 🌙 yurta</div>
+      </div>
+
+      <div class="ht-stop">
+        <div class="ht-dot"></div>
+        <div class="ht-line ht-bus"></div>
+        <div class="ht-transport" title="Bus">🚌</div>
+        <div class="ht-city">Tiflis</div>
+        <div class="ht-date">12–15 jun</div>
+      </div>
+
+      <div class="ht-stop ht-stop-last">
+        <div class="ht-dot ht-dot-end"></div>
+        <div class="ht-city">Ereván</div>
+        <div class="ht-date">16–18 jun</div>
+      </div>
+
+    </div>
+
+    <div class="ht-legend">
+      <div class="htl-item">
+        <div class="htl-icon">🚗</div>
+        <div class="htl-line-sample htl-land"></div>
+        <span>Carretera</span>
+      </div>
+      <div class="htl-item">
+        <div class="htl-icon">✈️</div>
+        <div class="htl-line-sample htl-air"></div>
+        <span>Vuelo</span>
+      </div>
+      <div class="htl-item">
+        <div class="htl-icon">🚂</div>
+        <div class="htl-line-sample htl-train"></div>
+        <span>Tren</span>
+      </div>
+      <div class="htl-item">
+        <div class="htl-icon">🚌</div>
+        <div class="htl-line-sample htl-bus"></div>
+        <span>Bus</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="hero-scroll">
+    <div class="scroll-dot"></div>
+    <span>Scroll</span>
+  </div>
+</section>
+
+<!-- CATALOG -->
+<div class="catalog">
+
+  <!-- DESTINOS -->
+  <section class="row">
+    <div class="row-head">
+      <span class="row-num">01</span>
+      <h2 class="row-title">Los <em>destinos</em></h2>
+      <span class="row-sub">Tocá una ciudad para ver actividades e itinerario</span>
+    </div>
+    <div class="cards-scroll" id="destinos-row">
+
+      <div class="dest-card" onclick="openDestSheet('almaty')" id="card-almaty">
+        <div class="dest-bg" style="background:linear-gradient(150deg,#051f16 0%,#0d4a30 40%,#1a6b4a 70%,#0a2c20 100%);"></div>
+        <div class="dest-vignette"></div>
+        <div class="dest-shine"></div>
+        <div class="dest-accent" style="background:#4dc9a0;box-shadow:0 0 8px #4dc9a0;"></div>
+        <div class="dest-ord">01</div>
+        <div class="dest-content">
+          <div class="dest-pais">Kazajistán</div>
+          <div class="dest-name">Almaty</div>
+          <div class="dest-dias">Días 1-2</div>
+        </div>
+      </div>
+      <div class="dest-card" onclick="openDestSheet('bishkek')" id="card-bishkek">
+        <div class="dest-bg" style="background:linear-gradient(150deg,#060d28 0%,#0f2060 40%,#1a3488 70%,#0a1840 100%);"></div>
+        <div class="dest-vignette"></div>
+        <div class="dest-shine"></div>
+        <div class="dest-accent" style="background:#6b8fff;box-shadow:0 0 8px #6b8fff;"></div>
+        <div class="dest-ord">02</div>
+        <div class="dest-content">
+          <div class="dest-pais">Kirguistán</div>
+          <div class="dest-name">Bishkek</div>
+          <div class="dest-dias">Día 3</div>
+        </div>
+      </div>
+      <div class="dest-card" onclick="openDestSheet('taskent')" id="card-taskent">
+        <div class="dest-bg" style="background:linear-gradient(150deg,#1e0e00 0%,#4a2400 40%,#7a3c00 70%,#2e1600 100%);"></div>
+        <div class="dest-vignette"></div>
+        <div class="dest-shine"></div>
+        <div class="dest-accent" style="background:#d4884a;box-shadow:0 0 8px #d4884a;"></div>
+        <div class="dest-ord">03</div>
+        <div class="dest-content">
+          <div class="dest-pais">Uzbekistán</div>
+          <div class="dest-name">Taskent</div>
+          <div class="dest-dias">Días 4-5 + 11</div>
+        </div>
+      </div>
+      <div class="dest-card" onclick="openDestSheet('samarcanda')" id="card-samarcanda">
+        <div class="dest-bg" style="background:linear-gradient(150deg,#03091e 0%,#08235c 40%,#103090 70%,#061440 100%);"></div>
+        <div class="dest-vignette"></div>
+        <div class="dest-shine"></div>
+        <div class="dest-accent" style="background:#4a8eff;box-shadow:0 0 8px #4a8eff;"></div>
+        <div class="dest-ord">04</div>
+        <div class="dest-content">
+          <div class="dest-pais">Uzbekistán</div>
+          <div class="dest-name">Samarcanda</div>
+          <div class="dest-dias">Días 6-8 · Registán</div>
+        </div>
+      </div>
+      <div class="dest-card" onclick="openDestSheet('bujara')" id="card-bujara">
+        <div class="dest-bg" style="background:linear-gradient(150deg,#1a0800 0%,#3d1800 40%,#6a2c00 70%,#2a1000 100%);"></div>
+        <div class="dest-vignette"></div>
+        <div class="dest-shine"></div>
+        <div class="dest-accent" style="background:#c87040;box-shadow:0 0 8px #c87040;"></div>
+        <div class="dest-ord">05</div>
+        <div class="dest-content">
+          <div class="dest-pais">Uzbekistán</div>
+          <div class="dest-name">Bujará</div>
+          <div class="dest-dias">Día 9 · Ciudad-museo</div>
+        </div>
+      </div>
+      <div class="dest-card" onclick="openDestSheet('kyzylkum')" id="card-kyzylkum">
+        <div class="dest-bg" style="background:linear-gradient(150deg,#220800 0%,#5a1800 40%,#9a2c00 70%,#381200 100%);"></div>
+        <div class="dest-vignette"></div>
+        <div class="dest-shine"></div>
+        <div class="dest-accent" style="background:#ff6b30;box-shadow:0 0 8px #ff6b30;"></div>
+        <div class="dest-ord">06</div>
+        <div class="dest-content">
+          <div class="dest-pais">Uzbekistán · Desierto</div>
+          <div class="dest-name">Kyzyl Kum</div>
+          <div class="dest-dias">Día 10 · Yurta</div>
+        </div>
+      </div>
+      <div class="dest-card" onclick="openDestSheet('tiflis')" id="card-tiflis">
+        <div class="dest-bg" style="background:linear-gradient(150deg,#031408 0%,#083820 40%,#0d5a30 70%,#051c12 100%);"></div>
+        <div class="dest-vignette"></div>
+        <div class="dest-shine"></div>
+        <div class="dest-accent" style="background:#40c878;box-shadow:0 0 8px #40c878;"></div>
+        <div class="dest-ord">07</div>
+        <div class="dest-content">
+          <div class="dest-pais">Georgia</div>
+          <div class="dest-name">Tiflis</div>
+          <div class="dest-dias">Días 12-15 · Cáucaso</div>
+        </div>
+      </div>
+      <div class="dest-card" onclick="openDestSheet('erevan')" id="card-erevan">
+        <div class="dest-bg" style="background:linear-gradient(150deg,#1a0404 0%,#3d0c0c 40%,#6a1414 70%,#2a0808 100%);"></div>
+        <div class="dest-vignette"></div>
+        <div class="dest-shine"></div>
+        <div class="dest-accent" style="background:#ff5555;box-shadow:0 0 8px #ff5555;"></div>
+        <div class="dest-ord">08</div>
+        <div class="dest-content">
+          <div class="dest-pais">Armenia</div>
+          <div class="dest-name">Ereván</div>
+          <div class="dest-dias">Días 16-18 · Final</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="section-div"><div class="div-line"></div><div class="div-text">Información del viaje</div><div class="div-line"></div></div>
+
+  <!-- INFO -->
+  <section class="row" style="padding-top:28px;">
+    <div class="row-head">
+      <span class="row-num">02</span>
+      <h2 class="row-title">Todo lo que necesitás <em>saber</em></h2>
+    </div>
+    <div class="cards-scroll">
+      <div class="info-card" onclick="openInfoSheet('itinerario')">
+        <div class="info-icon">📅</div>
+        <div><div class="info-title">Itinerario</div><div class="info-sub">18 días paso a paso</div></div>
+      </div>
+      <div class="info-card" onclick="openInfoSheet('paises')">
+        <div class="info-icon">🌍</div>
+        <div><div class="info-title">Países y monedas</div><div class="info-sub">6 países, datos prácticos</div></div>
+      </div>
+      <div class="info-card" onclick="openInfoSheet('llevar')">
+        <div class="info-icon">🎒</div>
+        <div><div class="info-title">Qué llevar</div><div class="info-sub">Lista oficial Volate</div></div>
+      </div>
+      <div class="info-card" onclick="openInfoSheet('vuelos')">
+        <div class="info-icon">✈️</div>
+        <div><div class="info-title">Vuelos</div><div class="info-sub">4 vuelos en el viaje</div></div>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<!-- MAPA -->
+<section id="mapa-section" class="mapa-section">
+  <div class="mapa-inner">
+  <div class="mapa-section-num">08</div>
+  <div class="mapa-section-top">
+    <div>
+      <div class="mapa-eyebrow">El recorrido completo</div>
+      <h2 class="mapa-title">De Almaty <em>a Ereván</em></h2>
+      <p class="mapa-sub">Tocá un pin · línea continua = tren o terrestre · punteada = vuelo</p>
+    </div>
+    <div class="mapa-top-btn">
+      <a href="https://www.google.com/maps/d/viewer?mid=1vUeaLcyjLfB4raq3yN6mNC0efV5NvcI" target="_blank" class="mapa-btn">🗺 Abrir en Google Maps</a>
+      <div class="mapa-top-btn-note">City tours · actividades · pines</div>
+    </div>
+    <div class="mapa-stats">
+      <div class="mapa-stat-item">
+        <div class="mapa-stat-dot"></div>
+        <div class="mapa-stat-val">8</div>
+        <div class="mapa-stat-lbl">ciudades</div>
+      </div>
+      <div class="mapa-stat-item">
+        <div class="mapa-stat-dot" style="background:var(--gold);"></div>
+        <div class="mapa-stat-val">4</div>
+        <div class="mapa-stat-lbl">vuelos</div>
+      </div>
+      <div class="mapa-stat-item">
+        <div class="mapa-stat-dot" style="background:rgba(200,100,50,0.8);"></div>
+        <div class="mapa-stat-val">18</div>
+        <div class="mapa-stat-lbl">días</div>
+      </div>
+    </div>
+  </div>
+  <div class="mapa-wrap">
+    <svg class="mapa-svg" viewBox="0 0 800 420" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <radialGradient id="bgGrad" cx="50%" cy="50%" r="70%">
+          <stop offset="0%" stop-color="rgba(14,50,70,0.3)"/>
+          <stop offset="100%" stop-color="rgba(4,10,16,0)"/>
+        </radialGradient>
+        <filter id="glow">
+          <feGaussianBlur stdDeviation="2" result="blur"/>
+          <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+        </filter>
+      </defs>
+      <!-- Fondo radial sutil -->
+      <rect width="800" height="420" fill="url(#bgGrad)"/>
+
+      <!-- Labels de zonas -->
+      <text class="pais-label" x="100" y="150" text-anchor="middle">GEORGIA</text>
+      <text class="pais-label" x="100" y="310" text-anchor="middle">ARMENIA</text>
+      <text class="pais-label" x="680" y="66" text-anchor="middle">KAZAJISTÁN · KIRGUISTÁN</text>
+      <text class="pais-label" x="500" y="390" text-anchor="middle">UZBEKISTÁN · TAYIKISTÁN</text>
+
+      <!-- Rutas terrestres -->
+      <line class="ruta-terrestre" x1="738" y1="100" x2="690" y2="119"/>
+      <line class="ruta-terrestre" x1="580" y1="200" x2="533" y2="286"/>
+      <line class="ruta-terrestre" x1="533" y1="286" x2="482" y2="280"/>
+      <line class="ruta-terrestre" x1="482" y1="280" x2="531" y2="225"/>
+      <line class="ruta-terrestre" x1="531" y1="225" x2="533" y2="286"/>
+      <line class="ruta-terrestre" x1="77" y1="179" x2="71" y2="258"/>
+      <!-- Vuelos -->
+      <line class="ruta-vuelo" x1="690" y1="119" x2="580" y2="200"/>
+      <line class="ruta-vuelo" x1="533" y1="286" x2="77" y2="179"/>
+
+      <!-- ALMATY -->
+      <g class="pin-group" data-id="almaty">
+        <circle class="pin-pulse" cx="738" cy="100" r="13" style="animation-delay:0s"/>
+        <circle class="pin-circle" cx="738" cy="100" r="12"/>
+        <text class="pin-num" x="738" y="104">1</text>
+        <rect class="pin-label-bg" x="712" y="118" width="52" height="14" rx="3"/>
+        <text class="pin-label" x="738" y="129" text-anchor="middle">Almaty</text>
+      </g>
+      <!-- BISHKEK -->
+      <g class="pin-group" data-id="bishkek">
+        <circle class="pin-pulse" cx="690" cy="119" r="13" style="animation-delay:0.3s"/>
+        <circle class="pin-circle" cx="690" cy="119" r="12"/>
+        <text class="pin-num" x="690" y="123">2</text>
+        <rect class="pin-label-bg" x="628" y="108" width="54" height="14" rx="3"/>
+        <text class="pin-label" x="655" y="119" text-anchor="middle">Bishkek</text>
+      </g>
+      <!-- TASKENT -->
+      <g class="pin-group" data-id="taskent">
+        <circle class="pin-pulse" cx="580" cy="200" r="13" style="animation-delay:0.6s"/>
+        <circle class="pin-circle" cx="580" cy="200" r="12"/>
+        <text class="pin-num" x="580" y="204">3</text>
+        <rect class="pin-label-bg" x="550" y="176" width="60" height="14" rx="3"/>
+        <text class="pin-label" x="580" y="187" text-anchor="middle">Taskent</text>
+      </g>
+      <!-- SAMARCANDA -->
+      <g class="pin-group" data-id="samarcanda">
+        <circle class="pin-pulse" cx="533" cy="286" r="13" style="animation-delay:0.9s"/>
+        <circle class="pin-circle" cx="533" cy="286" r="12"/>
+        <text class="pin-num" x="533" y="290">4</text>
+        <rect class="pin-label-bg" x="546" y="306" width="82" height="14" rx="3"/>
+        <text class="pin-label" x="587" y="317" text-anchor="middle">Samarcanda</text>
+      </g>
+      <!-- BUJARÁ -->
+      <g class="pin-group" data-id="bujara">
+        <circle class="pin-pulse" cx="482" cy="280" r="13" style="animation-delay:1.2s"/>
+        <circle class="pin-circle" cx="482" cy="280" r="12"/>
+        <text class="pin-num" x="482" y="284">5</text>
+        <rect class="pin-label-bg" x="404" y="300" width="54" height="14" rx="3"/>
+        <text class="pin-label" x="431" y="311" text-anchor="middle">Bujará</text>
+      </g>
+      <!-- KYZYL KUM -->
+      <g class="pin-group" data-id="kyzylkum">
+        <circle class="pin-pulse" cx="531" cy="225" r="13" style="animation-delay:1.5s"/>
+        <circle class="pin-circle" cx="531" cy="225" r="12"/>
+        <text class="pin-num" x="531" y="229">6</text>
+        <rect class="pin-label-bg" x="545" y="213" width="70" height="14" rx="3"/>
+        <text class="pin-label" x="580" y="224" text-anchor="middle">Kyzyl Kum</text>
+      </g>
+      <!-- TIFLIS -->
+      <g class="pin-group" data-id="tiflis">
+        <circle class="pin-pulse" cx="77" cy="179" r="13" style="animation-delay:1.8s"/>
+        <circle class="pin-circle" cx="77" cy="179" r="12"/>
+        <text class="pin-num" x="77" y="183">7</text>
+        <rect class="pin-label-bg" x="92" y="169" width="44" height="14" rx="3"/>
+        <text class="pin-label" x="114" y="180" text-anchor="middle">Tiflis</text>
+      </g>
+      <!-- EREVÁN -->
+      <g class="pin-group" data-id="erevan">
+        <circle class="pin-pulse" cx="71" cy="258" r="13" style="animation-delay:2.1s"/>
+        <circle class="pin-circle" cx="71" cy="258" r="12"/>
+        <text class="pin-num" x="71" y="262">8</text>
+        <rect class="pin-label-bg" x="86" y="248" width="48" height="14" rx="3"/>
+        <text class="pin-label" x="110" y="259" text-anchor="middle">Ereván</text>
+      </g>
+    </svg>
+    <div class="mapa-panel" id="mapa-panel"><div class="mapa-panel-inner"><p class="mapa-panel-hint">Tocá un pin para ver detalles del destino</p></div></div>
+  </div>
+
+  </div><!-- /mapa-inner -->
+</section>
+
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <span class="footer-logo">V</span>
+      <span>Volate Adventures</span>
+    </div>
+    <div class="footer-center">Ruta de la Seda &nbsp;·&nbsp; Junio 2026</div>
+    <a href="https://www.volateadventures.com" target="_blank" class="footer-link">volateadventures.com ↗</a>
+  </div>
+</footer>
+
+<!-- SHEETS -->
+<div class="backdrop" id="backdrop" onclick="closeAll()"></div>
+<div class="sheet" id="dest-sheet">
+  <div class="sheet-glow" id="dest-sheet-glow"></div>
+  <div class="sheet-handle"></div>
+  <div class="sheet-header" id="dest-sheet-header">
+    <button class="sheet-close" onclick="closeAll()">×</button>
+  </div>
+  <div class="sheet-body" id="dest-sheet-body"></div>
+</div>
+<div class="sheet" id="info-sheet">
+  <div class="sheet-handle"></div>
+  <div class="sheet-header" id="info-sheet-header">
+    <button class="sheet-close" onclick="closeAll()">×</button>
+  </div>
+  <div class="sheet-body" id="info-sheet-body"></div>
+</div>
+
+<script>
+// IntersectionObserver: animar rutas del mapa al entrar en viewport
+(function() {
+  const mapaWrap = document.querySelector('.mapa-wrap');
+  if (!mapaWrap) return;
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        mapaWrap.classList.add('anim-in');
+        observer.disconnect();
+      }
+    });
+  }, { threshold: 0.3 });
+  observer.observe(mapaWrap);
+})();
+
+// Accent colors per destination for glow
+const destAccents = {
+  almaty:'#2aaa82',bishkek:'#3a8aaa',taskent:'#c8943c',samarcanda:'#3a68cc',
+  bujara:'#c4512d',kyzylkum:'#e06020',tiflis:'#28a068',erevan:'#c04040'
+};
+
+
+// ---- NAV SCROLL ----
+window.addEventListener('scroll', () => {
+  document.getElementById('main-nav').classList.toggle('solid', window.scrollY > 60);
+});
+
+// ---- DATOS DESTINOS ----
+const destinos = {
+  almaty: {
+    nombre: 'Almaty', pais: 'Kazajistán', emoji: '🏔',
+    meta: ['Días 1-2', '24°/12°', '2 noches'],
+    cosas: [
+      {n:'01', h:'Subir a Kok-Tobe en teleférico', p:'El cerro emblema de la ciudad. Vistas panorámicas con las montañas Tian Shan de fondo. No te lo pierdas al atardecer.', url:'https://maps.google.com/?q=43.23306,76.97611'},
+      {n:'02', h:'Regatear en el Green Bazaar', p:'Probar queso kurt, nueces, frutas secas y si te animás, carne de caballo. El mercado más auténtico de la ciudad.', url:'https://maps.google.com/?q=43.256,76.9495'},
+      {n:'03', h:'Llegar hasta el Big Almaty Lake', p:'Lago alpino turquesa a 2.500 m. Taxi hasta la entrada y caminata los últimos kilómetros.', url:'https://maps.google.com/?q=43.053,76.984'},
+      {n:'04', h:'Visitar Medeu y Shymbulak', p:'La pista de patinaje más alta del mundo y la estación de esquí. Subir solo por el paisaje ya vale la pena.', url:'https://maps.google.com/?q=43.1575,77.05861'},
+      {n:'05', h:'Probar beshbarmak en un restaurante local', p:'El plato nacional kazajo: cordero con fideos anchos y caldo. Una experiencia gastronómica que no se repite.', url:'https://maps.google.com/?q=43.256,76.9495'},
+    ],
+    dias: [
+      {n:'Día 01 · Kazajistán', t:'Bienvenida a <em>Almaty</em>', d:'Encuentro con el grupo en el alojamiento. Día para descansar y conectar con el espíritu explorador.', clima:'24° / 12° · soleado', tags:[]},
+      {n:'Día 02 · Kazajistán', t:'Almaty: entre <em>tradición y modernidad</em>', d:'City tour por <strong>Green Bazaar</strong>, <strong>Catedral Zenkov</strong>, <strong>Monumento de la Independencia</strong> y la <strong>calle peatonal Arbat</strong>. Tarde libre.', clima:'25° / 13° · soleado', tags:['City tour','Tarde libre']},
+    ]
+  },
+  bishkek: {
+    nombre: 'Bishkek', pais: 'Kirguistán', emoji: '⛰',
+    meta: ['Día 3', '25°/13°', '1 noche'],
+    cosas: [
+      {n:'01', h:'Perderse por el Bazar Osh', p:'El mercado más grande y caótico. Probar kumys (leche de yegua fermentada) directo de los puestos.', url:'https://maps.google.com/?q=42.875,74.57'},
+      {n:'02', h:'Alquilar una bici y recorrer los bulevares soviéticos', p:'Bishkek está diseñada para pedalear. Avenidas anchas de la era soviética ideales para explorar.', url:'https://maps.google.com/?q=42.8746,74.5987'},
+      {n:'03', h:'Probar manti en una chaykhana local', p:'Empanadones kirguises al vapor con cordero. Una chaykhana (teahouse) local es el mejor lugar.', url:'https://maps.google.com/?q=42.874,74.596'},
+      {n:'04', h:'Excursión a Ala-Archa National Park', p:'A 45 min del centro. Montañas, ríos y senderos de fácil acceso para una caminata corta.', url:'https://maps.google.com/?q=42.6597,74.4789'},
+      {n:'05', h:'Visitar la Torre Burana', p:'Ruinas del siglo XI a 80 km de la ciudad. Minarete de adobe y balbales (estatuas funerarias de piedra) únicos.', url:'https://maps.google.com/?q=42.74694,75.24861'},
+    ],
+    dias: [
+      {n:'Día 03 · Kirguistán', t:'Rumbo a <em>Bishkek</em>', d:'Cruce fronterizo terrestre. City tour por <strong>Plaza Ala-Too</strong>, <strong>Estatua de Manas</strong>, <strong>Teatro de Ópera y Ballet</strong>, <strong>Plaza de la Victoria</strong> y <strong>Parlamento</strong>.', clima:'25° / 13° · viento en el cruce', tags:[{t:'Traslado',c:'terra'},{t:'City tour',c:''}]},
+    ]
+  },
+  taskent: {
+    nombre: 'Taskent', pais: 'Uzbekistán', emoji: '🕌',
+    meta: ['Días 4-5 + 11', '32°/18°', '3 noches total'],
+    cosas: [
+      {n:'01', h:'Recorrer el metro buscando la estación más linda', p:'Cada parada es diferente: mosaicos, candelabros, mármol. El billete cuesta centavos.', url:'https://maps.google.com/?q=41.3122,69.2797'},
+      {n:'02', h:'Regatear en el Bazar Chorsu', p:'Bajo la cúpula turquesa: especias, panes non y textiles bordados (suzanis).', url:'https://maps.google.com/?q=41.3267,69.235'},
+      {n:'03', h:'Comer el mejor plov de la ciudad', p:'El Plov Centre es famoso por el arroz con cordero más auténtico de Uzbekistán. Mejor ir temprano, se acaba.', url:'https://maps.google.com/?q=41.3103,69.2374'},
+      {n:'04', h:'Tomar té en una chaykhana', p:'Chai verde con pan. El ritual uzbeko por excelencia. Solo sentarse y observar la vida pasar.', url:'https://maps.google.com/?q=41.2995,69.2401'},
+      {n:'05', h:'Caminar por el Parque Independencia al atardecer', p:'El pulmón verde de la ciudad. Fuentes, monumentos y el contraste entre la Taskent soviética y moderna.', url:'https://maps.google.com/?q=41.3091,69.2789'},
+    ],
+    dias: [
+      {n:'Día 04 · Uzbekistán', t:'De Bishkek a <em>Taskent</em>', d:'Vuelo hacia la vibrante capital uzbeka. Tiempo libre para descubrir bulevares y plazas.', clima:'28° / 16° · calor al llegar', tags:[{t:'Vuelo interno',c:'terra'},{t:'Tarde libre',c:''}]},
+      {n:'Día 05 · Uzbekistán', t:'Taskent, <em>historia viva</em>', d:'City tour por <strong>Complejo Khast-Imam</strong>, <strong>bazar Chorsu</strong>, <strong>metro de Taskent</strong>, <strong>Plaza Amir Timur</strong> y <strong>Teatro Navoi</strong>.', clima:'32° / 18° · sol fuerte, muy seco', tags:[{t:'City tour',c:''},{t:'Tarde libre',c:''}]},
+      {n:'Día 11 · Uzbekistán', t:'Regreso a <em>Taskent</em>', d:'Mañana en el desierto, regreso a Samarcanda y tren nocturno a Taskent. Última noche en Uzbekistán.', clima:'34° / 19° · sol fuerte todo el día', tags:[{t:'Tren',c:'teal'},{t:'Día largo',c:''}]},
+    ]
+  },
+  samarcanda: {
+    nombre: 'Samarcanda', pais: 'Uzbekistán', emoji: '✨',
+    meta: ['Días 6-8', '32°/17°', '3 noches'],
+    cosas: [
+      {n:'01', h:'Fotografiar el Registán al atardecer', p:'Cuando el sol baja, los azulejos se iluminan en dorado y turquesa. El momento más fotogénico de todo el viaje.', url:'https://maps.google.com/?q=39.6553,66.9756'},
+      {n:'02', h:'Ir al Observatorio de Ulugh Beg', p:'Restos del observatorio del siglo XV donde se midió la duración del año con precisión asombrosa.', url:'https://maps.google.com/?q=39.6748,67.0056'},
+      {n:'03', h:'Comer shashlik y nan en el Siyob Bazaar', p:'Brochetas de cordero a las brasas y pan recién salido del tandir. El mercado más auténtico de Samarcanda.', url:'https://maps.google.com/?q=39.6619,66.9799'},
+      {n:'04', h:'Ver cómo hacen papel artesanal en Konigil', p:'Pueblo en las afueras donde se fabrica papel de seda con una técnica del siglo VIII. Podés comprar uno.', url:'https://maps.google.com/?q=39.698,67.023'},
+      {n:'05', h:'Subir a la mezquita Hazrat Khizr', p:'Templo en una colina con la mejor terraza panorámica de Samarcanda. Bibi-Khanym al fondo.', url:'https://maps.google.com/?q=39.66343,66.98319'},
+    ],
+    dias: [
+      {n:'Día 06 · Uzbekistán', t:'Camino a <em>Samarcanda</em>', d:'Tren matinal hacia una de las ciudades más icónicas de la Ruta de la Seda.', clima:'31° / 17° · soleado, seco', tags:[{t:'Tren',c:'teal'}]},
+      {n:'Día 07 · Uzbekistán', t:'Samarcanda, <em>esplendor eterno</em>', d:'Tour por <strong>Plaza Registán</strong>, <strong>mausoleo Gur-e-Amir</strong>, <strong>Mezquita Bibi-Khanym</strong>, <strong>necrópolis Shah-i-Zinda</strong> y <strong>Siyob Bazaar</strong>.', clima:'32° / 17° · sol despejado, ideal para fotos', tags:[{t:'City tour',c:''}]},
+      {n:'Día 08 · Tayikistán', t:'Los <em>Siete Lagos</em> de Tayikistán', d:'Excursión por los <strong>Montes Fann</strong>: lagos turquesa y esmeralda entre montañas. Cruce fronterizo. Regreso a Samarcanda.', clima:'24° / 12° · fresco de montaña', tags:[{t:'Naturaleza',c:'teal'},{t:'Excursión',c:''}]},
+    ]
+  },
+  bujara: {
+    nombre: 'Bujará', pais: 'Uzbekistán', emoji: '🏺',
+    meta: ['Día 9', '35°/20°', '1 noche'],
+    cosas: [
+      {n:'01', h:'Sentarse en el Lyabi-Hauz a tomar chai', p:'La plaza con el estanque medieval rodeada de moreras centenarias. El lugar más apacible de Bujará.', url:'https://maps.google.com/?q=39.7733,64.4243'},
+      {n:'02', h:'Recorrer los bazares cubiertos medievales', p:'Toki Zargaron (joyería), Toki Sarrofon (cambistas) y Toki Telpak Furushon (sombreros). Siglos en el mismo lugar.', url:'https://maps.google.com/?q=39.7745,64.4187'},
+      {n:'03', h:'Ver el show de música y danza tradicional', p:'El Caravanserai Nadir organiza shows al atardecer con danzas uzbekas y cena en el patio histórico.', url:'https://maps.google.com/?q=39.7738,64.4247'},
+      {n:'04', h:'Buscar cerámica en talleres artesanos', p:'Bujará es famosa por su cerámica azul y blanca. Muchos talleres dejan ver el proceso y venden directo.', url:'https://maps.google.com/?q=39.7756,64.4143'},
+      {n:'05', h:'Probar samsa recién salida del tandir', p:'Empanadas de hojaldre con cordero en horno de barro. Hay puestos en todo el casco histórico.', url:'https://maps.google.com/?q=39.7752,64.4097'},
+    ],
+    dias: [
+      {n:'Día 09 · Uzbekistán', t:'Llegada a <em>Bujará</em>', d:'Trayecto desde Samarcanda (4 hs). Al llegar, city tour por <strong>Lyabi-Hauz</strong>, <strong>Arq de Bujará</strong>, <strong>Poi Kalyan (minarete Kalon)</strong>, <strong>Magoki Attor</strong> y <strong>Chor Minor</strong>.', clima:'35° / 20° · muy caliente y seco, llevar agua', tags:[{t:'Traslado',c:'teal'},{t:'City tour',c:''}]},
+    ]
+  },
+  kyzylkum: {
+    nombre: 'Kyzyl Kum', pais: 'Uzbekistán · Desierto', emoji: '🏜',
+    meta: ['Día 10', '38°/18°', '1 noche en yurta'],
+    cosas: [
+      {n:'01', h:'Montar un camello bactriano al amanecer', p:'Atravesar las dunas en camello de dos jorobas con la luz del amanecer. Una de las experiencias más únicas del viaje.', url:'https://maps.google.com/?q=40.83,66.85'},
+      {n:'02', h:'Subir una duna para ver el atardecer', p:'El desierto se vuelve dorado, rosa y violeta. Sin contaminación lumínica, los colores son de otro mundo.', url:'https://maps.google.com/?q=40.835,66.855'},
+      {n:'03', h:'Cenar alrededor del fogón con la familia nómada', p:'Plov en olla grande, brochetas y música tradicional uzbeka. Una cena que no se repite en ningún restaurante.', url:'https://maps.google.com/?q=40.83,66.85'},
+      {n:'04', h:'Dormir en yurta y despertar en el desierto', p:'Tienda circular de fieltro, estufa al centro, sin ruido de ciudad. El silencio absoluto es parte de la experiencia.', url:'https://maps.google.com/?q=40.83,66.85'},
+      {n:'05', h:'Observar la Vía Láctea a simple vista', p:'Sin contaminación lumínica en kilómetros a la redonda. Una de las mejores noches estrelladas de todo el viaje.', url:'https://maps.google.com/?q=40.87,66.95'},
+    ],
+    dias: [
+      {n:'Día 10 · Uzbekistán', t:'Desierto de <em>Kyzyl Kum</em>', d:'Inicio de la experiencia en el desierto. Noche en yurta tradicional bajo cielo estrellado y silencio absoluto.', clima:'38° día / 18° noche · gran amplitud térmica', tags:[{t:'★ Yurta',c:'gold'},{t:'Desierto',c:'terra'}]},
+    ]
+  },
+  tiflis: {
+    nombre: 'Tiflis', pais: 'Georgia', emoji: '🍷',
+    meta: ['Días 12-15', '27°/15°', '4 noches'],
+    cosas: [
+      {n:'01', h:'Bañarse en los baños sulfurosos de Abanotubani', p:'Aguas termales calientes bajo cúpulas de ladrillo. Pushkin dijo que eran los mejores baños del mundo. Reservar con tiempo.', url:'https://maps.google.com/?q=41.68778,44.81111'},
+      {n:'02', h:'Subir a Mtatsminda en teleférico', p:'Vista 360° de toda la ciudad, el río Mtkvari y las montañas del Cáucaso. Mejor al atardecer.', url:'https://maps.google.com/?q=41.6944,44.78694'},
+      {n:'03', h:'Tomar el metro estilo soviético', p:'Estaciones profundas con mosaicos únicos. Sugerido por Volate para el día libre. Fácil de explorar.', url:'https://maps.google.com/?q=41.69472,44.79972'},
+      {n:'04', h:'Comer khinkali y tomar vino qvevri', p:'Empanadones georgianos con caldo adentro y vino del método qvevri, el más antiguo del mundo (8.000 años).', url:'https://maps.google.com/?q=41.69183,44.80944'},
+      {n:'05', h:'Recorrer el Dry Bridge Bazaar', p:'Mercado de pulgas a cielo abierto con antigüedades soviéticas, pinturas, alfombras y artesanías.', url:'https://maps.google.com/?q=41.6938,44.80055'},
+    ],
+    dias: [
+      {n:'Día 12 · Georgia', t:'Vuelo a <em>Tiflis</em>', d:'Vuelo desde Taskent a la capital del Cáucaso. Tarde libre para descansar y empezar a sentir la ciudad.', clima:'26° / 14° · más fresco al llegar', tags:[{t:'Vuelo',c:'terra'},{t:'Tarde libre',c:''}]},
+      {n:'Día 13 · Georgia', t:'Tiflis, <em>capital del Cáucaso</em>', d:'City tour por iglesias antiguas, callejuelas empedradas y barrios históricos.', clima:'27° / 15° · agradable, posible lluvia breve', tags:[{t:'City tour',c:''},{t:'Tarde libre',c:''}]},
+      {n:'Día 14 · Georgia', t:'Mtskheta, Uplistsikhe y <em>Gori</em>', d:'Excursión por <strong>Mtskheta</strong> (antigua capital espiritual), <strong>Uplistsikhe</strong> (ciudad rupestre en roca) y <strong>Gori</strong> (ciudad natal de Stalin).', clima:'27° / 14° · sol y nubes, fresco en altura', tags:[{t:'Excursión',c:''},{t:'Historia',c:'teal'}]},
+      {n:'Día 15 · Georgia', t:'Tiflis a <em>tu ritmo</em>', d:'Día libre. Recomendación de Volate: subirse al <strong>metro de estilo soviético</strong>, una de las curiosidades de la ciudad.', clima:'28° / 15° · ideal para caminar', tags:[{t:'Día libre',c:''}]},
+    ]
+  },
+  erevan: {
+    nombre: 'Ereván', pais: 'Armenia', emoji: '🏔',
+    meta: ['Días 16-18', '28°/14°', '2 noches · Final'],
+    cosas: [
+      {n:'01', h:'Ver las fuentes danzantes de noche', p:'La Plaza de la República se transforma con un show de fuentes sincronizadas con música clásica armenia.', url:'https://maps.google.com/?q=40.1773,44.5132'},
+      {n:'02', h:'Subir la Cascade para ver el Ararat', p:'Escalinata monumental con museos integrados. Desde arriba, si está despejado, el Monte Ararat aparece imponente.', url:'https://maps.google.com/?q=40.1888,44.5156'},
+      {n:'03', h:'Hacer una degustación en la Brandy Factory Ararat', p:'El brandy que Churchill pedía por cajas durante la guerra. Tour por la fábrica histórica y cata de barricas.', url:'https://maps.google.com/?q=40.17363,44.50118'},
+      {n:'04', h:'Recorrer el Vernissage en fin de semana', p:'Mercado de pulgas con alfombras armenias, joyería de obsidiana, arte y antigüedades soviéticas.', url:'https://maps.google.com/?q=40.179,44.5112'},
+      {n:'05', h:'Excursión al Templo Garni y Geghard', p:'A 40 min: el único templo pagano helenístico de Armenia y un monasterio tallado en roca del siglo IV. Ida y vuelta en 3 hs.', url:'https://maps.google.com/?q=40.1124,44.7307'},
+    ],
+    dias: [
+      {n:'Día 16 · Armenia', t:'Ereván, <em>esencia armenia</em>', d:'Bus a Ereván. Walking tour por plazas, avenidas, templos y miradores.', clima:'28° / 14° · soleado, seco', tags:[{t:'Bus',c:'terra'},{t:'Walking tour',c:''}]},
+      {n:'Día 17 · Armenia', t:'Monasterios y <em>vino</em>', d:'Excursión por <strong>monasterio de Khor Virap</strong> (vistas al Monte Ararat), <strong>Noravank</strong> (entre acantilados rojizos) y <strong>cueva Areni-1</strong> (vino más antiguo del mundo).', clima:'28° / 14° · sol fuerte en Khor Virap', tags:[{t:'Excursión',c:''}]},
+      {n:'Día 18 · Despedida', t:'Fin de una <em>gran travesía</em>', d:'Despedida del grupo y regreso a casa, llevando nuevas historias y amistades.', clima:'29° / 15° · soleado, despedida cálida', tags:[{t:'Regreso',c:''}]},
+    ]
+  }
+};
+
+// ---- INFO SHEETS DATA ----
+const infoData = {
+  itinerario: {
+    titulo: 'Itinerario <em>completo</em>',
+    eyebrow: '18 días · 6 países'
+  },
+  paises: {
+    titulo: 'Países y <em>datos prácticos</em>',
+    eyebrow: '6 países · Asia Central + Cáucaso'
+  },
+  llevar: {
+    titulo: 'Qué <em>llevar</em>',
+    eyebrow: 'Lista oficial Volate para junio'
+  },
+  vuelos: {
+    titulo: 'Vuelos <em>necesarios</em>',
+    eyebrow: '4 vuelos · no incluidos en el paquete'
+  }
+};
+
+// ---- OPEN / CLOSE ----
+function openDestSheet(id) {
+  const d = destinos[id];
+  if (!d) return;
+  document.querySelectorAll('.dest-card').forEach(c => c.classList.remove('active'));
+  document.getElementById('card-' + id).classList.add('active');
+
+  // Header
+  const hdr = document.getElementById('dest-sheet-header');
+  hdr.innerHTML = `
+    <button class="sheet-close" onclick="closeAll()">×</button>
+    <div class="sheet-eyebrow">${d.pais} · ${d.meta[0]}</div>
+    <div class="sheet-title">${d.nombre}</div>
+    <div class="sheet-meta">
+      ${d.meta.map(m => `<span class="sheet-pill">${m}</span>`).join('')}
+    </div>`;
+
+  // Tabs + body
+  const body = document.getElementById('dest-sheet-body');
+  body.innerHTML = `
+    <div class="sheet-tabs">
+      <div class="sheet-tab active" onclick="switchTab(this,'tab-cosas-${id}')">5 cosas para hacer</div>
+      <div class="sheet-tab" onclick="switchTab(this,'tab-dias-${id}')">El itinerario</div>
+    </div>
+    <div id="tab-cosas-${id}" class="sheet-tab-content active">
+      ${d.cosas.map(c => `
+        <div class="cosa-item">
+          <div class="cosa-num">${c.n}</div>
+          <div class="cosa-content">
+            <h5>${c.h}</h5>
+            <p>${c.p}</p>
+            <a class="pin-link" href="${c.url}" target="_blank">📍 Ver en mapa</a>
+          </div>
+        </div>`).join('')}
+    </div>
+    <div id="tab-dias-${id}" class="sheet-tab-content">
+      ${d.dias.map(dia => `
+        <div class="dia-item">
+          <div class="dia-num-badge">${dia.n}</div>
+          <div class="dia-titulo">${dia.t}</div>
+          <p class="dia-desc">${dia.d}</p>
+          <p class="dia-clima">${dia.clima}</p>
+          ${dia.tags.length ? `<div class="dia-tags-wrap">${dia.tags.map(tg => `<span class="dia-tag ${tg.c}">${tg.t}</span>`).join('')}</div>` : ''}
+        </div>`).join('')}
+    </div>`;
+
+  document.getElementById('backdrop').classList.add('open');
+  document.getElementById('dest-sheet').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function openInfoSheet(tipo) {
+  const info = infoData[tipo];
+  if (!info) return;
+  const hdr = document.getElementById('info-sheet-header');
+  hdr.innerHTML = `
+    <button class="sheet-close" onclick="closeAll()">×</button>
+    <div class="sheet-eyebrow">${info.eyebrow}</div>
+    <div class="sheet-title">${info.titulo}</div>`;
+
+  const body = document.getElementById('info-sheet-body');
+  body.innerHTML = getInfoContent(tipo);
+
+  document.getElementById('backdrop').classList.add('open');
+  document.getElementById('info-sheet').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function getInfoContent(tipo) {
+  if (tipo === 'itinerario') {
+    const todos = Object.values(destinos).flatMap(d => d.dias);
+    return todos.map(dia => `
+      <div class="dia-item">
+        <div class="dia-num-badge">${dia.n}</div>
+        <div class="dia-titulo">${dia.t}</div>
+        <p class="dia-desc">${dia.d}</p>
+        <p class="dia-clima">${dia.clima}</p>
+        ${dia.tags.length ? `<div class="dia-tags-wrap">${dia.tags.map(tg => `<span class="dia-tag ${tg.c}">${tg.t}</span>`).join('')}</div>` : ''}
+      </div>`).join('');
+  }
+  if (tipo === 'paises') {
+    return `
+    <div class="paises-grid">
+      <div class="pais-card"><div class="pais-flag">🇰🇿</div><div class="pais-nombre">Kazajistán</div>
+        <div class="pais-dato"><span class="pais-dato-label">Moneda</span><span class="pais-dato-valor">Tenge (KZT)</span></div>
+        <div class="pais-dato"><span class="pais-dato-label">Clima junio</span><span class="pais-dato-valor">25°/13° · soleado</span></div>
+        <div class="pais-dato"><span class="pais-dato-label">Idioma</span><span class="pais-dato-valor">Kazajo / Ruso</span></div>
+        <div class="pais-dato"><span class="pais-dato-label">Visado ARG/URU</span><span class="pais-dato-valor">No requerido</span></div>
+        <div class="pais-dato"><span class="pais-dato-label">Conectividad</span><span class="pais-dato-valor">SIM local recomendada</span></div>
+      </div>
+      <div class="pais-card"><div class="pais-flag">🇰🇬</div><div class="pais-nombre">Kirguistán</div>
+        <div class="pais-dato"><span class="pais-dato-label">Moneda</span><span class="pais-dato-valor">Som (KGS)</span></div>
+        <div class="pais-dato"><span class="pais-dato-label">Clima junio</span><span class="pais-dato-valor">25°/13° · soleado</span></div>
+        <div class="pais-dato"><span class="pais-dato-label">Idioma</span><span class="pais-dato-valor">Kirguís / Ruso</span></div>
+        <div class="pais-dato"><span class="pais-dato-label">Visado ARG/URU</span><span class="pais-dato-valor">No requerido</span></div>
+        <div class="pais-dato"><span class="pais-dato-label">Pago</span><span class="pais-dato-valor">Efectivo preferido</span></div>
+      </div>
+      <div class="pais-card"><div class="pais-flag">🇺🇿</div><div class="pais-nombre">Uzbekistán</div>
+        <div class="pais-dato"><span class="pais-dato-label">Moneda</span><span class="pais-dato-valor">Som uzbeko (UZS)</span></div>
+        <div class="pais-dato"><span class="pais-dato-label">Clima junio</span><span class="pais-dato-valor">32-38°/18° · muy seco</span></div>
+        <div class="pais-dato"><span class="pais-dato-label">Idioma</span><span class="pais-dato-valor">Uzbeko / Ruso</span></div>
+        <div class="pais-dato"><span class="pais-dato-label">Visado ARG/URU</span><span class="pais-dato-valor">No requerido</span></div>
+        <div class="pais-dato"><span class="pais-dato-label">Propinas</span><span class="pais-dato-valor">Habituales en restaurantes</span></div>
+      </div>
+      <div class="pais-card"><div class="pais-flag">🇹🇯</div><div class="pais-nombre">Tayikistán</div>
+        <div class="pais-dato"><span class="pais-dato-label">Moneda</span><span class="pais-dato-valor">Somoni (TJS)</span></div>
+        <div class="pais-dato"><span class="pais-dato-label">Clima junio</span><span class="pais-dato-valor">24°/12° en altura</span></div>
+        <div class="pais-dato"><span class="pais-dato-label">Idioma</span><span class="pais-dato-valor">Tayiko / Ruso</span></div>
+        <div class="pais-dato"><span class="pais-dato-label">Visado ARG/URU</span><span class="pais-dato-valor">Solo día 8 (excursión)</span></div>
+      </div>
+      <div class="pais-card"><div class="pais-flag">🇬🇪</div><div class="pais-nombre">Georgia</div>
+        <div class="pais-dato"><span class="pais-dato-label">Moneda</span><span class="pais-dato-valor">Lari (GEL)</span></div>
+        <div class="pais-dato"><span class="pais-dato-label">Clima junio</span><span class="pais-dato-valor">27°/15° · algo de lluvia</span></div>
+        <div class="pais-dato"><span class="pais-dato-label">Idioma</span><span class="pais-dato-valor">Georgiano / Ruso</span></div>
+        <div class="pais-dato"><span class="pais-dato-label">Visado ARG/URU</span><span class="pais-dato-valor">No requerido</span></div>
+        <div class="pais-dato"><span class="pais-dato-label">Tarjetas</span><span class="pais-dato-valor">Bien aceptadas</span></div>
+      </div>
+      <div class="pais-card"><div class="pais-flag">🇦🇲</div><div class="pais-nombre">Armenia</div>
+        <div class="pais-dato"><span class="pais-dato-label">Moneda</span><span class="pais-dato-valor">Dram (AMD)</span></div>
+        <div class="pais-dato"><span class="pais-dato-label">Clima junio</span><span class="pais-dato-valor">28°/14° · soleado, seco</span></div>
+        <div class="pais-dato"><span class="pais-dato-label">Idioma</span><span class="pais-dato-valor">Armenio / Ruso</span></div>
+        <div class="pais-dato"><span class="pais-dato-label">Visado ARG/URU</span><span class="pais-dato-valor">No requerido</span></div>
+        <div class="pais-dato"><span class="pais-dato-label">Moneda recomendada</span><span class="pais-dato-valor">USD en buen estado</span></div>
+      </div>
+    </div>
+    <div style="margin-top:24px;padding:16px;background:rgba(30,156,180,0.1);border-left:3px solid #1e9cb4;border-radius:0 8px 8px 0;">
+      <p style="font-size:14px;color:#aaa;line-height:1.6;"><strong style="color:#e5e5e5;">💡 Consejo de Volate:</strong> Llevá USD en billetes nuevos y sin marcas. Son la moneda de cambio universal en toda la ruta. Evitá depender solo de tarjeta en mercados y zonas remotas.</p>
+    </div>`;
+  }
+  if (tipo === 'llevar') {
+    return `
+    <div class="llevar-section">
+      <div class="llevar-h">Indumentaria</div>
+      <ul class="llevar-list">
+        <li>Campera impermeable, cortaviento y abrigo liviano/térmico</li>
+        <li>Buzo polar o abrigo intermedio</li>
+        <li>Remeras de manga corta y manga larga</li>
+        <li>Pantalones cómodos, calzas o ropa liviana para caminatas</li>
+        <li>Short y ropa cómoda para dormir</li>
+        <li>Buff para cuello y cara</li>
+        <li>Ropa interior y medias cómodas/abrigadas</li>
+        <li>Calzado cómodo para caminar y sandalias livianas</li>
+        <li>Gorro para el sol, gorro de lana y lentes de sol</li>
+        <li>Ropa conservadora para mezquitas y monasterios</li>
+        <li>Pañuelo o buff para polvo y viento</li>
+      </ul>
+    </div>
+    <div class="llevar-section">
+      <div class="llevar-h">Accesorios</div>
+      <ul class="llevar-list">
+        <li>Pasaporte, visas y seguro de viaje (impresos y digitales)</li>
+        <li>Mochila pequeña para el día a día</li>
+        <li>Adaptador universal y cargador portátil (power bank)</li>
+        <li>Auriculares, celular y/o cámara con espacio</li>
+        <li>Botella reutilizable para agua</li>
+        <li>Protector solar y repelente de insectos</li>
+        <li>Medicación personal y kit básico de higiene</li>
+        <li>Toallitas húmedas o alcohol en gel</li>
+        <li>Snacks para trayectos largos</li>
+        <li>Cambio chico en dólares y/o moneda local</li>
+        <li>Riñonera o bolso seguro para documentación</li>
+        <li>Candado pequeño para equipaje</li>
+        <li>Linterna pequeña o frontal (yurta y trayectos nocturnos)</li>
+      </ul>
+    </div>
+    <div class="llevar-section">
+      <div class="llevar-h" style="color:#d4a960;">Dinero</div>
+      <ul class="llevar-list">
+        <li><strong>USD 2.000 – 2.500</strong> aprox. para gastos personales, comidas, entradas y compras</li>
+        <li>Priorizar dólares estadounidenses en buen estado (billetes de USD 50 y 100)</li>
+        <li>Combinación recomendada: mitad efectivo, mitad tarjeta. O todo en efectivo.</li>
+        <li>No depender solo de tarjeta: en mercados y zonas remotas suele no funcionar</li>
+        <li>Comidas: estimar USD 800 para los 18 días</li>
+      </ul>
+    </div>`;
+  }
+  if (tipo === 'vuelos') {
+    return `
+    <div class="vuelo-item">
+      <div class="vuelo-icon">✈️</div>
+      <div>
+        <div class="vuelo-dia">Día 01 — Llegada</div>
+        <div class="vuelo-ruta">Tu país → Almaty (KAZ)</div>
+        <div class="vuelo-nota">Vuelo de llegada al inicio del viaje. Coordinar llegada antes de las 18hs.</div>
+      </div>
+    </div>
+    <div class="vuelo-item">
+      <div class="vuelo-icon">✈️</div>
+      <div>
+        <div class="vuelo-dia">Día 04 — Interno</div>
+        <div class="vuelo-ruta">Bishkek (KGZ) → Taskent (UZB)</div>
+        <div class="vuelo-nota">Vuelo interno, aprox. 1 hora. Volate facilita la búsqueda.</div>
+      </div>
+    </div>
+    <div class="vuelo-item">
+      <div class="vuelo-icon">✈️</div>
+      <div>
+        <div class="vuelo-dia">Día 12 — Cáucaso</div>
+        <div class="vuelo-ruta">Taskent (UZB) → Tiflis (GEO)</div>
+        <div class="vuelo-nota">Vuelo desde Uzbekistán a Georgia. El más importante del recorrido.</div>
+      </div>
+    </div>
+    <div class="vuelo-item">
+      <div class="vuelo-icon">✈️</div>
+      <div>
+        <div class="vuelo-dia">Día 18 — Regreso</div>
+        <div class="vuelo-ruta">Ereván (ARM) → Tu país</div>
+        <div class="vuelo-nota">Vuelo de regreso. Coordinar salida posterior a las 12hs.</div>
+      </div>
+    </div>
+    <div style="margin-top:24px;padding:16px;background:rgba(255,255,255,0.05);border-radius:8px;">
+      <p style="font-size:14px;color:#aaa;line-height:1.6;">Ningún pasaje aéreo está incluido en el paquete. Volate facilita vuelos sugeridos y la posibilidad de gestionarlos con agentes de confianza.</p>
+    </div>`;
+  }
+  return '';
+}
+
+function closeAll() {
+  document.getElementById('backdrop').classList.remove('open');
+  document.getElementById('dest-sheet').classList.remove('open');
+  document.getElementById('info-sheet').classList.remove('open');
+  document.querySelectorAll('.dest-card').forEach(c => c.classList.remove('active'));
+  document.querySelectorAll('.info-card').forEach(c => c.classList.remove('active'));
+  document.body.style.overflow = '';
+}
+
+function switchTab(el, tabId) {
+  const parent = el.closest('.sheet-body');
+  parent.querySelectorAll('.sheet-tab').forEach(t => t.classList.remove('active'));
+  parent.querySelectorAll('.sheet-tab-content').forEach(t => t.classList.remove('active'));
+  el.classList.add('active');
+  document.getElementById(tabId).classList.add('active');
+}
+
+// Swipe down to close sheets
+['dest-sheet','info-sheet'].forEach(id => {
+  const el = document.getElementById(id);
+  let startY = 0;
+  el.addEventListener('touchstart', e => { startY = e.touches[0].clientY; }, {passive:true});
+  el.addEventListener('touchend', e => {
+    if (e.changedTouches[0].clientY - startY > 80) closeAll();
+  }, {passive:true});
+});
+
+// Mapa SVG panel
+const mapaDestinos = {
+  almaty:{nombre:'Almaty',pais:'Kazajistán',dias:'Días 1-2',desc:'Puerta de entrada a Asia Central. Tian Shan al fondo y bazares llenos de especias.'},
+  bishkek:{nombre:'Bishkek',pais:'Kirguistán',dias:'Día 3',desc:'Capital kirguisa de avenidas anchas y aire nómada. Llegada por carretera desde Almaty.'},
+  taskent:{nombre:'Taskent',pais:'Uzbekistán',dias:'Días 4-5',desc:'Bazares, madrazas y el metro más bello de Asia Central.'},
+  samarcanda:{nombre:'Samarcanda',pais:'Uzbekistán',dias:'Días 6-8',desc:'El corazón de la Ruta de la Seda. El Registán, Bibi-Khanym y Shah-i-Zinda en azul cobalto.'},
+  bujara:{nombre:'Bujará',pais:'Uzbekistán',dias:'Día 9',desc:'Ciudad-museo de adobe y minaretes, casi sin alteraciones desde el medioevo.'},
+  kyzylkum:{nombre:'Kyzyl Kum',pais:'Uzbekistán',dias:'Día 10',desc:'Noche en yurta en el desierto rojo. Cielo estrellado infinito.'},
+  tiflis:{nombre:'Tiflis',pais:'Georgia',dias:'Días 12-15',desc:'Capital del Cáucaso. Ciudad vieja, fortaleza Narikala y vino qvevri.'},
+  erevan:{nombre:'Ereván',pais:'Armenia',dias:'Días 16-18',desc:'Plaza de la República, la Cascade y el Ararat al fondo.'}
+};
+document.querySelectorAll('.pin-group').forEach(g => {
+  g.addEventListener('click', () => {
+    document.querySelectorAll('.pin-group').forEach(p => p.classList.remove('active'));
+    g.classList.add('active');
+    const d = mapaDestinos[g.dataset.id];
+    if (!d) return;
+    document.getElementById('mapa-panel').innerHTML =
+      `<div class="mapa-panel-inner">
+         <div class="mapa-panel-meta">${d.pais} · ${d.dias}</div>
+         <div class="mapa-panel-title">${d.nombre}</div>
+         <p class="mapa-panel-desc">${d.desc}</p>
+       </div>`;
+  });
+});
+
+
+// Override openDestSheet to add glow
+const _origOpen = openDestSheet;
+// Add glow effect
+const origOpenDest = openDestSheet;
+window.openDestSheet = function(id) {
+  origOpenDest(id);
+  const accent = destAccents[id];
+  if (accent) {
+    document.getElementById('dest-sheet-glow').style.background =
+      `radial-gradient(ellipse at 50% 0%, ${accent}40 0%, transparent 70%)`;
+  }
+};
+</script>
+</body>
+</html>
